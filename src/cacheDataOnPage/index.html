@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaderboard Table</title> 
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body{
+			margin: 0;
+			font-size: 0.8rem;
+			font-family: sans-serif;
+			font-weight: 100;
+		}
+		table {
+			border:1px solid #b3adad;
+			border-collapse: collapse;
+			overflow: hidden;
+		}
+		table th {
+			color: #fff;
+			padding: 10px;
+		}
+		table td {
+			text-align: center;
+			padding: 8px;
+			color: #000;
+		}
+		thead th {
+			background-color: #2d6a46;
+		}
+
+		tbody .user:hover{
+			background-color: rgba(144, 183, 125, 0.4)
+		}
+
+		tbody  td:hover{
+			background-color: rgba(66, 133, 91, 0.4)
+		}
+		
+		tbody .current-user td{
+			color: #fff;
+			font-weight: bold;
+			padding: 10px;
+		}
+
+		tbody .current-user{
+			background-color: rgba(39, 174, 96, 1);
+			font-size: 1.0rem;
+		}
+
+		table .rank{
+			font-weight: bold;
+		}
+
+		table .current-user td:hover{
+			color: #fff;
+		}
+
+		.pagination-wrapper{
+			margin: auto;
+			width: fit-content;
+			margin-top: 10px;
+			display: block;
+		}
+
+		.pagination {
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			display:flex;
+		}
+		
+		.pagination li{
+			display: inline;
+			cursor: pointer;
+		}
+
+		.pagination li a {
+			display: inline-block;
+			text-decoration: none;
+			padding: 5px 10px;
+			color: #000;
+			border-radius: 5px;
+			transition: background-color 0.3s
+		}
+
+		.pagination li a.active {
+			background-color: rgba(39, 174, 96, 1);
+			color: #fff
+		}
+		
+		.pagination li a:hover:not(.active) {
+			background-color: #ddd;
+		}
+
+		#lds-ring {
+			display: none;
+			width: fit-content;
+			height: 80px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+			
+		#lds-ring:after {
+			content: " ";
+			display: block;
+			width: 64px;
+			height: 64px;
+			margin: 8px;
+			border-radius: 50%;
+			border: 6px solid #000;
+			border-color: #000 transparent #000 transparent;
+			animation: lds-dual-ring 1.2s linear infinite;
+		}
+
+		@keyframes lds-dual-ring {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+</head>
+<body style="margin: auto; width: fit-content;">
+	<div class="container" style="margin: auto; width: fit-content; position: relative;">
+		<table>
+			<thead>
+				<tr style="text-align: center;">
+					<th>Rank</th>
+					<th>Player Name</th>
+					<th>Score</th>
+					<th>Lottery Tickets</th>
+				</tr>
+			</thead>
+			<tbody id="table-body">
+			</tbody>
+		</table>
+		<div id="lds-ring"></div>
+		<div class="pagination-wrapper" >
+			<ul class="pagination">
+				<li>
+				<a id="page-first" onclick="loadData(this)" aria-label="Previous" style="display: none;">
+					<span aria-hidden="true"> First</span>
+				</a>
+				</li>
+				<li>
+				<a id="page-prev" onclick="loadData(this)" aria-label="Previous" style="display: none;">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+				</li>
+				<li><a id="1" onclick="loadData(this)" style="display: none;"></a></li>
+				<li><a id="2" onclick="loadData(this)" style="display: none;"></a></li>
+				<li><a id="3" onclick="loadData(this)" style="display: none;"></a></li>
+				<li>
+					<a id="page-next" onclick="loadData(this)" aria-label="Next" style="display: none;">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+				</li>
+				<li>
+				<a id="page-last" onclick="loadData(this)" aria-label="Next" style="display: none;">
+					<span aria-hidden="true"> Last</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+    </div>
+</body>
+<script type="text/javascript" charset="utf-8">
+	document.getElementById('lds-ring').style.display = 'block'
+	document.getElementById('lds-ring').style.setProperty('margin', '200px auto')
+	let pagination = {}
+	let page = 1
+	let totalPages = 1
+	let currentUser = {}
+	let userToken = ""
+	let leaderboardId = ""
+	let isReloadPage = true
+
+	const {paramLeaderboardId, paramUserToken} = getParamFromURL()
+	checkIsReloadPage()
+	initData(isReloadPage)
+
+	function getParamFromURL(){
+		const params = (new URL(document.location)).searchParams;
+		const paramLeaderboardId = params.get("leaderboardId");
+		const paramUserToken = params.get("userToken");
+		return {paramLeaderboardId, paramUserToken}
+	}
+
+	function checkIsReloadPage(){
+		if(!paramUserToken && leaderboardId === paramLeaderboardId){
+			currentUser = null
+			currentUser = {}
+			userToken=""
+			isReloadPage = false
+		}
+
+		if(paramUserToken && paramUserToken === userToken && leaderboardId === paramLeaderboardId) {
+			isReloadPage = false
+		}
+	}
+
+	function loadData(element) {
+		if (element.innerHTML === `${page}`) return
+		else if (element.id.includes('prev')) {
+			if (page - 1 < 1) return
+			page--
+		}
+		else if (element.id.includes('next')) {
+			if (page + 1 > totalPages) return
+			page++
+		}
+		else if (element.id.includes('first')) {
+			page = 1
+		}
+		else if (element.id.includes('last')) {
+			page = totalPages
+		}
+		else page = parseInt(element.innerHTML)
+
+		document.getElementById('1').style.display = 'none'
+		document.getElementById('2').style.display = 'none'
+		document.getElementById('3').style.display = 'none'
+		document.getElementById('page-first').style.display = 'none'
+		document.getElementById('page-prev').style.display = 'none'
+		document.getElementById('page-next').style.display = 'none'
+		document.getElementById('page-last').style.display = 'none'
+		document.getElementById('lds-ring').style.display = 'block'
+		document.getElementById("table-body").style.filter = "blur(3px)"
+
+		checkIsReloadPage()
+		initData()
+	}
+
+	async function getDataFromAPI(leaderboardId, userToken){
+		const response = await fetch(`/leaderboard/internal/v1/leaderboards/${leaderboardId}/scores:load?page=${page}`,
+				userToken ? {
+					 headers:{
+						'x-user-token': userToken
+					}
+				} : undefined
+			)
+			.catch((err) => {
+				console.log(`load data err: ${err}`);
+			})
+		const data = await response.json().catch((err) => { 
+			console.log(`response.json() err: ${err}`); 
+		})
+		return data
+	}
+
+	async function initData(isReloadPage) {
+		let items = pagination[page]
+		if (!items || isReloadPage) {
+
+			const data = await getDataFromAPI(paramLeaderboardId, paramUserToken)
+
+			items = data?.items || []
+			currentUser = data?.currentUser || null
+			if (data?.pagination?.totalPages){
+				totalPages = data.pagination.totalPages
+			}
+			
+			pagination[page] = items
+		}
+
+		let count = 0
+		let start = (page - 1) || 1
+		if (page === totalPages && start - 1 > 0) start--
+
+		while(count < 3 && start <= totalPages) {
+			count ++
+			const element = document.getElementById(`${count}`)
+			element.innerHTML = start
+			if (page === start){
+				element.style.background = 'rgba(39, 174, 96, 1)'
+				element.style.color ='#fff'
+			}
+			else {
+				element.style.background = 'white'
+				element.style.color ='#000'
+			} 
+			element.style.display = 'block'
+			start++
+		}
+		document.getElementById('page-first').style.display = 'block'
+		document.getElementById('page-prev').style.display = 'block'
+		document.getElementById('page-next').style.display = 'block'
+		document.getElementById('page-last').style.display = 'block'
+		document.getElementById('lds-ring').style.display = 'none'
+		renderDataInTheTable(items)
+		renderUserDataInTheTable(currentUser)
+	}
+
+	function renderDataInTheTable(data) {
+		const mytable = document.getElementById("table-body");
+		document.getElementById('lds-ring').style.setProperty('margin', '0')
+		mytable.style.filter = "none"
+		while (mytable.firstChild){
+			mytable.removeChild(mytable.lastChild);
+		}
+		data.forEach(item => {
+			const newRow = document.createElement("tr");
+			newRow.className = 'user'
+			let cell = document.createElement("td");
+			cell.className = 'rank'
+			cell.innerText = item.rank;
+			newRow.appendChild(cell);
+			cell = document.createElement("td");
+			cell.innerText = item.playerName;
+			newRow.appendChild(cell);
+			cell = document.createElement("td");
+			cell.innerText = item.score || 0;
+			newRow.appendChild(cell);
+			cell = document.createElement("td");
+			cell.innerText = item.lotteryTickets || 0;
+			newRow.appendChild(cell);
+			mytable.appendChild(newRow);
+		});
+	}
+
+	function renderUserDataInTheTable(data) {
+		console.log(data)
+		if(!data) return
+		const mytable = document.getElementById("table-body");
+		const newRow = document.createElement("tr");
+		newRow.className = 'current-user'
+		let cell = document.createElement("td");
+		cell.className = 'rank'
+		cell.innerText = data.rank === 0 || data.rank === -1 ? 'N/A' : data.rank;
+		newRow.appendChild(cell);
+		cell = document.createElement("td");
+		cell.innerText = data.playerName;
+		newRow.appendChild(cell);
+		cell = document.createElement("td");
+		cell.innerText = data.rank === 0 || data.rank === -1 ? 'N/A' : data.score ;
+		newRow.appendChild(cell);
+		cell = document.createElement("td");
+		cell.innerText = data.rank === 0 || data.rank === -1 ? 'N/A' :  data.lotteryTickets;
+		newRow.appendChild(cell);
+		mytable.appendChild(newRow);
+	}
+</script>
+</html>
