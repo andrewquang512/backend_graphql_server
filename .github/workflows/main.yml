@@ -1,0 +1,11 @@
+on:
+  push:
+    branches:
+      - "expriment_deploy"
+    paths:
+      - ".github/workflows/github-ci.yaml"
+  pull_request:
+    branches:
+      - "expriment_deploy" 
+    paths:
+      - ".github/workflows/github-ci.yaml"
