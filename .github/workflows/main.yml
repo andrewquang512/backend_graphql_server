@@ -5,6 +5,7 @@ on:
     branches: [ experiment_deploy ]
   pull_request:
     branches: [ experiment_deploy ]
+  workflow_dispatch:
 
 defaults:
   run:
