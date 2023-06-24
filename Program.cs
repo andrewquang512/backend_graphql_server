@@ -4,9 +4,8 @@ using Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Todo
 builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("MythicEmpire"));
+builder.Configuration.GetSection("MythicEmpire"));
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<CardService>();
 builder.Services.AddSingleton<GameSessionService>();
