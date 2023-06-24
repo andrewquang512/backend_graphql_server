@@ -30,8 +30,6 @@ jobs:
         dotnet-version: 5.0.x
     - name: AWS CLI
       run: dotnet tool install -g Amazon.Lambda.Tools
-    - name: Restore dependencies
-      run: dotnet restore Services.sln
     - name: Build
       run: dotnet publish -c Release --self-contained false -r linux-x64 -o publish
     - name: Deploy to Lambda
