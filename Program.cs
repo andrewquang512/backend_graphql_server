@@ -11,7 +11,9 @@ builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<CardService>();
 builder.Services.AddSingleton<GameSessionService>();
 
-
+// Register Lambda to replace Kestrel as the web server for the ASP.NET Core application.
+// If the application is not running in Lambda then this method will do nothing. 
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // End todo
 

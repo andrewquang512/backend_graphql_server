@@ -19,7 +19,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
-      OWNER_LAYER_ACCOUNT_ID: ${{secrets.OWNER_LAYER_ACCOUNT_ID}}
+      AWS_IAM_ROLE_ARN: ${{secrets.AWS_IAM_ROLE_ARN}}
 
     steps:
     - uses: actions/checkout@v2
@@ -32,7 +32,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Services.sln
     - name: Build
-      run: dotnet build --no-restore Services.sln
+      run: dotnet publish -c Release --self-contained false -r linux-x64 -o publish
     - name: Deploy to Lambda
       working-directory: ./Services/ApiServices
-      run:  dotnet lambda deploy-function --function-name mythic-empire-backend-service --function-role arn:aws:iam::${{secrets.OWNER_LAYER_ACCOUNT_ID}}:role/Superadmin --package-location ./publish
+      run:  dotnet lambda deploy-function --region ${{secrets.AWS_DEFAULT_REGION}} --function-runtime dotnet6 --function-name mythic-empire-backend-service --function-role ${{secrets.AWS_IAM_ROLE_ARN}} 
