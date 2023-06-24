@@ -28,5 +28,11 @@ jobs:
         aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
         aws-region: ${{secrets.AWS_DEFAULT_REGION}}
     
+    - name: AWS CLI
+      run: dotnet tool install -g Amazon.Lambda.Tools
+    - name: Restore dependencies
+      run: dotnet restore Services.sln
+    - name: Build
+      run: dotnet build --no-restore Services.sln
     - name: Deploy to Lambda
       run: dotnet lambda deploy-function --function-name mythic-empire-backend-service --function-role arn:aws:iam::${{secrets.OWNER_LAYER_ACCOUNT_ID}}:role/Superadmin --package-location ./publish
