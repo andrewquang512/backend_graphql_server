@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
 
     runs-on: ubuntu-latest
     env: 
@@ -18,15 +18,18 @@ jobs:
       AWS_IAM_ROLE_ARN: ${{secrets.AWS_IAM_ROLE_ARN}}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: '6.0.x'
+    
     - name: AWS CLI
       run: dotnet tool install -g Amazon.Lambda.Tools
-    - name: Build
-      run: dotnet build --no-restore Service.sln
+    - name: Build and Publish
+      run: dotnet publish -c Release -o ./publish
     - name: Deploy to Lambda
       working-directory: ./Services/ApiServices
       run:  dotnet lambda deploy-function --region ${{secrets.AWS_DEFAULT_REGION}} --function-runtime dotnet6 --function-name mythic-empire-backend-service --function-role ${{secrets.AWS_IAM_ROLE_ARN}} 
