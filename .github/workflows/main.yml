@@ -28,8 +28,9 @@ jobs:
     
     - name: AWS CLI
       run: dotnet tool install -g Amazon.Lambda.Tools
+      
     - name: Build and Publish
       run: dotnet publish -c Release -o ./publish
+
     - name: Deploy to Lambda
-      working-directory: ./Services/ApiServices
       run:  dotnet lambda deploy-function --region ${{secrets.AWS_DEFAULT_REGION}} --function-runtime dotnet6 --function-name mythic-empire-backend-service --function-role ${{secrets.AWS_IAM_ROLE_ARN}} 
