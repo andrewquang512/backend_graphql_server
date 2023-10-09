@@ -35,6 +35,7 @@ jobs:
       - name: Update Code
         run: |
           npm install --only=production 
+          cp package.json src/package.json
           zip -r code.zip src
           aws lambda update-function-code --function-name images-social-backend-service --zip-file fileb://code.zip
 
