@@ -1,9 +1,10 @@
 // graphql.js
 
-const { ApolloServer } = require('apollo-server-lambda');
-const {
-  ApolloServerPluginLandingPageLocalDefault,
-} = require('apollo-server-core');
+import { ApolloServer } from '@apollo/server';
+import {
+  startServerAndCreateLambdaHandler,
+  handlers,
+} from '@as-integrations/aws-lambda';
 import { PrismaClient } from '@prisma/client';
 import typeDefs from './Type_Definitions/_typeDefs.js';
 import resolvers from './resolvers/resolvers.js';
@@ -19,13 +20,12 @@ const prisma = new PrismaClient({
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  csrfPrevention: true,
-  cache: 'bounded',
-  plugins: [
-    ApolloServerPluginLandingPageLocalDefault({ embed: true }),
-    ...(parseInt(process.env.IS_LOGGING) ? [loggingPlugin] : []),
-  ],
+  plugins: [...(parseInt(process.env.IS_LOGGING) ? [loggingPlugin] : [])],
   logger: console,
 });
 
-exports.handler = server.createHandler();
+export const handler = startServerAndCreateLambdaHandler(
+  server,
+  // We will be using the Proxy V2 handler
+  handlers.createAPIGatewayProxyEventV2RequestHandler(),
+);
