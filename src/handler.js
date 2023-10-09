@@ -1,6 +1,6 @@
 // graphql.js
 
-import { ApolloServer } from '@apollo/server';
+import { ApolloServer } from 'apollo-server';
 import {
   startServerAndCreateLambdaHandler,
   handlers,
