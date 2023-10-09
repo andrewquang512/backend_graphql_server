@@ -43,7 +43,7 @@ jobs:
           mkdir nodejs
           cp package.json nodejs/package.json
           cd nodejs
-          npm install --only=production 
+          npm install
           rm package.json package-lock.json
           cd ..
           zip -r package-layer.zip nodejs
