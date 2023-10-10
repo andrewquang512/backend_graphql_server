@@ -17,6 +17,3 @@ functions:
       - httpApi:
           path: /
           method: GET
-# Omit the following lines if you aren't using TS!
-plugins:
-  - serverless-plugin-typescript

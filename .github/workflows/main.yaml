@@ -34,6 +34,7 @@ jobs:
 
       - name: Update Code
         run: |
+          npm run prisma_gen
           cp package.json src/package.json
           zip -r code.zip src
           aws lambda update-function-code --function-name images-social-backend-service --zip-file fileb://code.zip
