@@ -1,6 +1,6 @@
 // graphql.js
 
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-lambda';
 import { PrismaClient } from '@prisma/client';
 import typeDefs from './Type_Definitions/_typeDefs.js';
 import resolvers from './resolvers/resolvers.js';
