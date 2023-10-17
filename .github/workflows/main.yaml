@@ -46,7 +46,7 @@ jobs:
           mkdir nodejs
           cp package.json nodejs/package.json
           cd nodejs
-          npm install --production
+          npm install --omit=dev
           rm package.json package-lock.json
           cd ..
           zip -r ${GITHUB_WORKSPACE}/package-layer.zip nodejs
