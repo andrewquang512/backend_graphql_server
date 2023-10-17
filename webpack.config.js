@@ -1,6 +1,3 @@
-import nodeExternals from 'webpack-node-externals';
-import CopyPlugin from 'copy-webpack-plugin';
-
 export default {
   target: 'node',
   entry: './src/handler.js',
@@ -23,12 +20,4 @@ export default {
       },
     ],
   },
-  externals: [nodeExternals()],
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        { from: './node_modules/.prisma/client/schema.prisma', to: './' }, // you may need to change `to` here.
-      ],
-    }),
-  ],
 };
