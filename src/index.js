@@ -1,8 +1,5 @@
 // Apollo
-import { ApolloServer } from 'apollo-server';
-// import { makeExecutableSchema } from '@graphql-tools/schema';
-// import { WebSocketServer } from 'ws';
-// import { useServer } from 'graphql-ws/lib/use/ws';
+import { ApolloServer } from '@apollo/server';
 // Prisma
 import { PrismaClient } from '@prisma/client';
 // Type definitions and resolvers
