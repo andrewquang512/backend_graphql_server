@@ -1,5 +1,6 @@
 // Apollo
 import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
 // Prisma
 import { PrismaClient } from '@prisma/client';
 // Type definitions and resolvers
@@ -42,6 +43,8 @@ const server = new ApolloServer({
   // csrfPrevention: true,
 });
 
-server.listen().then(({ url }) => {
-  console.log(`Server ready on ${url}`);
+const { url } = await startStandaloneServer(server, {
+  listen: { port: 4000 },
 });
+
+console.log(`Server ready at: ${url}`);
