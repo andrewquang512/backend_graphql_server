@@ -1,12 +1,14 @@
+import { prisma } from "../../database.js";
+
 const commentQuery = {
-  // postComments: async (parent, args, { prisma }, info) => {
+  // postComments: async (parent, args, info) => {
   //   return await prisma.level.findUnique({
   //     where: {
   //       userID: args.userID,
   //     },
   //   });
   // },
-  // userComments: async (parent, args, { prisma }, info) => {
+  // userComments: async (parent, args, info) => {
   //   return await prisma.post.findMany();
   // },
 };

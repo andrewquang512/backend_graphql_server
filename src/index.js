@@ -2,19 +2,15 @@
 import { ApolloServer } from '@apollo/server';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { startStandaloneServer } from '@apollo/server/standalone';
+
 // Prisma
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './database.js'
+
 // Type definitions and resolvers
 import typeDefs from './Type_Definitions/_typeDefs.js';
 import resolvers from './resolvers/resolvers.js';
 import { loggingPlugin } from './logging.js';
 
-// Connect to MongoDB
-export const prisma = new PrismaClient({
-  ...(parseInt(process.env.IS_LOGGING) && {
-    log: ['query', 'info', 'warn', 'error'],
-  }),
-});
 
 const connectToDatabase = async () => {
   try {

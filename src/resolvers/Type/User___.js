@@ -1,12 +1,14 @@
+import { prisma } from "../../database.js";
+
 const User = {
-  level: async (parent, args, { prisma }, info) => {
+  level: async (parent, args, info) => {
     return await prisma.level.findUnique({
       where: {
         userId: parent.id,
       },
     });
   },
-  posts: async (parent, args, { prisma }, info) => {
+  posts: async (parent, args, info) => {
     return await prisma.post.findMany({
       where: {
         userId: parent.id,

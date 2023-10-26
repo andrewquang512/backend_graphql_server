@@ -1,7 +1,7 @@
-import * as Prisma from '@prisma/client';
+import { prisma } from "../../database.js";
 
 const postMutation = {
-  createPost: async (parent, args, { prisma }, info) => {
+  createPost: async (parent, args, info) => {
     let post;
     try {
       post = await prisma.post.create({
@@ -44,7 +44,7 @@ const postMutation = {
 
     return post;
   },
-  deletePost: async (parent, args, { prisma }, info) => {
+  deletePost: async (parent, args, info) => {
     let post;
     try {
       post = await prisma.post.delete({
@@ -61,7 +61,7 @@ const postMutation = {
 
     return post;
   },
-  deleteAllPost: async (parent, args, { prisma }, info) => {
+  deleteAllPost: async (parent, args, info) => {
     let result;
     try {
       result = await prisma.post.deleteMany({});
@@ -75,7 +75,7 @@ const postMutation = {
     return result;
   },
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  updatePost: async (parent, args, { prisma }, info) => {
+  updatePost: async (parent, args, info) => {
     const { updatedUser, ...updateInfo } = args.data;
     let result;
     try {
@@ -97,7 +97,7 @@ const postMutation = {
 
     return updatedUser;
   },
-  interactPost: async (parent, args, { prisma }, info) => {
+  interactPost: async (parent, args, info) => {
     let post;
 
     if (args.data.isLiked) {

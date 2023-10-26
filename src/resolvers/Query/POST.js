@@ -1,15 +1,17 @@
+import { prisma } from "../../database.js";
+
 const postQuery = {
-  allPosts: async (parent, args, { prisma }, info) => {
+  allPosts: async (parent, args, info) => {
     return await prisma.post.findMany();
   },
-  postInfo: async (parent, args, { prisma }, info) => {
+  postInfo: async (parent, args, info) => {
     return await prisma.post.findUnique({
       where: {
         id: args.data.postId,
       },
     });
   },
-  getNewFeed: async (parent, args, { prisma }, info) => {
+  getNewFeed: async (parent, args, info) => {
     let nodes;
     const after = args.after;
     // console.log({ after });

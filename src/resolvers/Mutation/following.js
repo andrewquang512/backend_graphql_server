@@ -1,5 +1,7 @@
+import { prisma } from "../../database.js";
+
 const followingMutation = {
-  updateFollowing: async (parent, args, { prisma }, info) => {
+  updateFollowing: async (parent, args, info) => {
     let user;
     let followedUser;
 
@@ -54,7 +56,7 @@ const followingMutation = {
 
     return user;
   },
-  unfollowUser: async (parent, args, { prisma }, info) => {
+  unfollowUser: async (parent, args, info) => {
     let user;
     let followedUser;
 

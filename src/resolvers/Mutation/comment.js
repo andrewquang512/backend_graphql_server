@@ -1,7 +1,7 @@
-import * as Prisma from '@prisma/client';
+import { prisma } from "../../database.js";
 
 const commentMutation = {
-  createComment: async (parent, args, { prisma }, info) => {
+  createComment: async (parent, args, info) => {
     let cmt;
     try {
       cmt = await prisma.comment.create({
@@ -20,7 +20,7 @@ const commentMutation = {
     }
     return cmt;
   },
-  deleteComment: async (parent, args, { prisma }, info) => {
+  deleteComment: async (parent, args, info) => {
     let cmt;
     try {
       cmt = await prisma.comment.delete({
@@ -37,7 +37,7 @@ const commentMutation = {
 
     return cmt;
   },
-  updateComment: async (parent, args, { prisma }, info) => {
+  updateComment: async (parent, args, info) => {
     return await prisma.comment.update({
       where: {
         id: args.data.cmtId,

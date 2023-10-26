@@ -1,8 +1,10 @@
+import { prisma } from "../../database.js";
+
 const tagQuery = {
-  allTags: async (parent, args, { prisma }, info) => {
+  allTags: async (parent, args, info) => {
     return await prisma.tag.findMany();
   },
-  tagInfo: async (parent, args, { prisma }, info) => {
+  tagInfo: async (parent, args, info) => {
     return await prisma.category.findUnique({
       where: {
         id: args.data.tag.toLowerCase(),

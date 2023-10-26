@@ -1,7 +1,8 @@
 import { DEFAULT_LIMIT } from '../../constants.js';
+import { prisma } from "../../database.js";
 
 const storyQuery = {
-  allStories: async (parent, args, { prisma }, info) => {
+  allStories: async (parent, args, info) => {
     try {
       return await prisma.story.findMany();
     } catch (e) {
@@ -9,7 +10,7 @@ const storyQuery = {
       throw e;
     }
   },
-  getNewStories: async (parent, args, { prisma }, info) => {
+  getNewStories: async (parent, args, info) => {
     const { limit, after } = args;
 
     try {
@@ -26,7 +27,7 @@ const storyQuery = {
       throw e;
     }
   },
-  storyInfo: async (parent, args, { prisma }, info) => {
+  storyInfo: async (parent, args, info) => {
     return await prisma.story.findUnique({
       where: {
         id: args.data.storyId,
