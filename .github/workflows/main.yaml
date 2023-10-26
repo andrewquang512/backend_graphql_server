@@ -15,6 +15,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_IAM_ROLE_ARN: ${{ secrets.AWS_IAM_ROLE_ARN }}
       OWNER_LAYER_ACCOUNT_ID: ${{ secrets.OWNER_LAYER_ACCOUNT_ID }}
+      MY_PAT: ${{ secrets.MY_PAT }}
 
     steps:
       - name: Checkout Repository
@@ -55,3 +56,11 @@ jobs:
           maxLayerVersion=$(aws lambda list-layer-versions --layer-name arn:aws:lambda:ap-southeast-1:${OWNER_LAYER_ACCOUNT_ID}:layer:images-social-backend-service-package-layer --query 'max_by(LayerVersions, &Version).LayerVersionArn' | sed 's/"//g')
           aws lambda wait function-updated --function-name images-social-backend-service
           aws lambda update-function-configuration --function-name images-social-backend-service --layers $maxLayerVersion
+
+      - name: repo-sync
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: 'https://github.com/HUNG-rushb/Images-Social-Server.git'
+          source_branch: 'mirror'
+          destination_branch: 'experiment_deploy_apollo'
+          github_token: ${{ secrets.MY_PAT }}
