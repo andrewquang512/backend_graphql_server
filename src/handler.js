@@ -1,10 +1,13 @@
 // Apollo
 import { ApolloServer } from '@apollo/server';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { startServerAndCreateLambdaHandler, handlers } from '@as-integrations/aws-lambda';
+import {
+  startServerAndCreateLambdaHandler,
+  handlers,
+} from '@as-integrations/aws-lambda';
 
 // Prisma
-import { prisma } from './database.js'
+import { prisma } from './prisma/database.js';
 
 // Type definitions and resolvers
 import typeDefs from './Type_Definitions/_typeDefs.js';
@@ -45,9 +48,8 @@ export const handler = startServerAndCreateLambdaHandler(
   {
     middleware: [
       async (event) => {
-        console.log('###? received event=' + JSON.stringify(event))
-      }
-    ]
-}
+        console.log('###? received event=' + JSON.stringify(event));
+      },
+    ],
+  },
 );
-

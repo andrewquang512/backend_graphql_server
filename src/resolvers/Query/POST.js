@@ -1,4 +1,4 @@
-import { prisma } from "../../database.js";
+import { prisma } from '../../prisma/database.js';
 
 const postQuery = {
   allPosts: async (parent, args, info) => {

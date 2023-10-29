@@ -1,4 +1,4 @@
-import { prisma } from "../../database.js";
+import { prisma } from '../../prisma/database.js';
 
 const levelQuery = {
   allLevels: async (parent, args, info) => {

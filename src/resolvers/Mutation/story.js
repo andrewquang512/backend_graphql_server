@@ -1,4 +1,4 @@
-import { prisma } from "../../database.js";
+import { prisma } from '../../prisma/database.js';
 
 const storyMutation = {
   createStory: async (parent, args, info) => {

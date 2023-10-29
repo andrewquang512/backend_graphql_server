@@ -1,5 +1,5 @@
 import { DEFAULT_LIMIT } from '../../constants.js';
-import { prisma } from "../../database.js";
+import { prisma } from '../../prisma/database.js';
 
 const storyQuery = {
   allStories: async (parent, args, info) => {

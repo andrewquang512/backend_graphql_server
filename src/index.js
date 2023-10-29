@@ -4,13 +4,12 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { startStandaloneServer } from '@apollo/server/standalone';
 
 // Prisma
-import { prisma } from './database.js'
+import { prisma } from './prisma/database.js';
 
 // Type definitions and resolvers
 import typeDefs from './Type_Definitions/_typeDefs.js';
 import resolvers from './resolvers/resolvers.js';
 import { loggingPlugin } from './logging.js';
-
 
 const connectToDatabase = async () => {
   try {
@@ -35,7 +34,10 @@ const server = new ApolloServer({
     origin: '*', // <- allow request from all domains
     credentials: true, // <- enable CORS response for requests with credentials (cookies, http authentication)
   },
-  plugins: [ApolloServerPluginLandingPageLocalDefault, ...(parseInt(process.env.IS_LOGGING) ? [loggingPlugin] : [])],
+  plugins: [
+    ApolloServerPluginLandingPageLocalDefault,
+    ...(parseInt(process.env.IS_LOGGING) ? [loggingPlugin] : []),
+  ],
   logger: console,
   // csrfPrevention: true,
 });
