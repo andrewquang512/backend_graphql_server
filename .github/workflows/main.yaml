@@ -42,9 +42,6 @@ jobs:
           cp src/prisma/schema.prisma dist/schema.prisma
           zip -r code.zip dist
           aws lambda update-function-code --function-name images-social-backend-service --zip-file fileb://code.zip
-
-      - name: Update Node Modules
-        run: |
           mkdir nodejs
           cp package.json nodejs/package.json
           cd nodejs
