@@ -47,8 +47,11 @@ jobs:
         run: |
           mkdir nodejs
           cp package.json nodejs/package.json
+          cp src/prisma/ERD.svg nodejs/ERD.svg
+          cp src/prisma/schema.prisma nodejs/schema.prisma
           cd nodejs
           npm install --omit=dev
+          prisma generate --schema=./schema.prisma
           rm package.json package-lock.json
           cd ..
           zip -r ${GITHUB_WORKSPACE}/package-layer.zip nodejs
