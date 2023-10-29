@@ -46,7 +46,7 @@ jobs:
           cp package.json nodejs/package.json
           cd nodejs
           npm install --omit=dev
-          cp -TRv ../../node_modules/.prisma/ node_modules/.prisma/
+          cp -TRv ../node_modules/.prisma/ node_modules/.prisma/
           rm package.json package-lock.json
           cd ..
           zip -r ${GITHUB_WORKSPACE}/package-layer.zip nodejs
