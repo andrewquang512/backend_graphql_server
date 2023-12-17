@@ -21,7 +21,7 @@ jobs:
 
         - name: Push to Destination Repository
           run: |
-            git remote add destination https://github.com/andrewquang512/backend_graphql_server.git
+            git remote add destination https://${{ secrets.MY_PAT }}@github.com/andrewquang512/backend_graphql_server
             git push destination HEAD:mirror
           env:
             GITHUB_TOKEN: ${{ secrets.MY_PAT }}
