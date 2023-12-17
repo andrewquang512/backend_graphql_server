@@ -12,28 +12,43 @@ on:
       - experiment_deploy_apollo
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_IAM_ROLE_ARN: ${{ secrets.AWS_IAM_ROLE_ARN }}
-      OWNER_LAYER_ACCOUNT_ID: ${{ secrets.OWNER_LAYER_ACCOUNT_ID }}
+  sync:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Check if it's a merge commit
-        run: |
-          if [ -n "$(git log -1 --merges --pretty=%B)" ]; then
-            echo "This is a merge commit. Skipping the workflow."
-            exit 78
-          fi
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      steps:
+        - name: Checkout Source Repository
+          uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
+        - name: Push to Destination Repository
+          run: |
+            git remote add destination https://github.com/andrewquang512/backend_graphql_server.git
+            git push destination HEAD:mirror
+          env:
+            GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#     env:
+#       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#       AWS_IAM_ROLE_ARN: ${{ secrets.AWS_IAM_ROLE_ARN }}
+#       OWNER_LAYER_ACCOUNT_ID: ${{ secrets.OWNER_LAYER_ACCOUNT_ID }}
+# 
+#     steps:
+#       - name: Check if it's a merge commit
+#         run: |
+#           if [ -n "$(git log -1 --merges --pretty=%B)" ]; then
+#             echo "This is a merge commit. Skipping the workflow."
+#             exit 78
+#           fi
+#       - name: Checkout Repository
+#         uses: actions/checkout@v2
+# 
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: 16
 # 
 #       - name: Configure AWS Credentials
 #         uses: aws-actions/configure-aws-credentials@v1
