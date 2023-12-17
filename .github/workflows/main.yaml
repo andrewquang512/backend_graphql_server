@@ -14,17 +14,17 @@ on:
 jobs:
   sync:
       runs-on: ubuntu-latest
-
       steps:
-        - name: Checkout Source Repository
-          uses: actions/checkout@v3
-
-        - name: Push to Destination Repository
-          run: |
-            git remote add destination https://${{ secrets.MY_PAT }}@github.com/andrewquang512/backend_graphql_server
-            git push destination HEAD:mirror
-          env:
-            GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: repo-sync
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: "https://${{ secrets.MY_PAT }}@github.com/andrewquang512/backend_graphql_server"
+          source_branch: "mirror"
+          destination_branch: "https://${{ secrets.MY_PAT }}@github.com/andrewquang512/experimentLab"
+          github_token: ${{ secrets.MY_PAT }}
 
 # jobs:
 #   build-and-deploy:
