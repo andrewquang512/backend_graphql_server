@@ -7,35 +7,39 @@ import storyMutation from './story.js';
 import commentMutation from './comment.js';
 import categoryMutation from './category.js';
 import albumMutation from './album.js';
-// import tagMutation from './tag.js';
+import tagMutation from './tag.js';
 import followerMutation from './follower.js';
 import followingMutation from './following.js';
+import reportMutation from './report.js';
+import contestMutation from './contest.js';
+import chatMutation from './chat.js';
+import messageMutation from './message.js';
+import profileMutation from './profile.js';
+import skillMutation from './skill.js';
+import utilityMutation from './utility.js';
+import notiMutation from './notification.js';
 
 const Mutation = {
-  // User
   ...userMutation,
-  // Level
   ...levelMutation,
-  // Image
   ...imageMutation,
-  // Image Info
   ...imageInfoMutation,
-  // Post
   ...postMutation,
-  // Story
   ...storyMutation,
-  // Comment
   ...commentMutation,
-  // Category
   ...categoryMutation,
-  // Album
   ...albumMutation,
-  // Tag
-  // ...tagMutation,
-  // Follower
+  ...tagMutation,
   ...followerMutation,
-  // Following
   ...followingMutation,
+  ...reportMutation,
+  ...contestMutation,
+  ...chatMutation,
+  ...messageMutation,
+  ...profileMutation,
+  ...skillMutation,
+  ...utilityMutation,
+  ...notiMutation,
 };
 
 export default Mutation;

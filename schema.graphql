@@ -1,0 +1,808 @@
+input AddBiographyInput {
+  content: String!
+  userId: ID!
+}
+
+input AddSkillDefinedListInput {
+  nameList: [String]!
+}
+
+type Album {
+  createdAt: String!
+  id: ID!
+  name: String!
+  posts: [Post]!
+  updatedAt: String!
+  userId: User!
+}
+
+input AlbumInfoInput {
+  albumId: ID!
+  currentUserId: ID!
+  userId: ID!
+}
+
+type Category {
+  createdAt: String!
+  id: ID!
+  name: String!
+  posts: [Post]!
+  updatedAt: String!
+}
+
+input CategoryInfoInput {
+  categoryId: ID!
+}
+
+type Chat {
+  createdAt: String!
+  id: ID!
+  lastMessageAt: String!
+  messages: [Message]!
+  userIDs: [User]!
+}
+
+input ChatInfoByUserIdInput {
+  userIDs: [ID]!
+}
+
+input ChatInfoInput {
+  chatId: ID!
+}
+
+type Comment {
+  child: [Comment]
+  content: String!
+  createdAt: String!
+  downVoteUserlist: [String]!
+  id: ID!
+  postId: Post!
+  storyId: Story!
+  upVoteUserlist: [String]!
+  userId: User!
+  votes: Int!
+}
+
+type CommentEdge {
+  cursor: String!
+  node: Comment
+}
+
+type CommentPagination {
+  edges: [CommentEdge!]!
+  pageInfo: PageInfo!
+}
+
+type Contest {
+  contestImageURL: String!
+  contestPrizeList: [Contest_Prize]!
+  description: String!
+  endDate: String
+  id: ID!
+  isFinished: Boolean!
+  joinedUserIds: [User]!
+  name: String!
+  startDate: String!
+}
+
+input ContestInfoInput {
+  contestId: ID!
+}
+
+input ContestPostsInpout {
+  contestId: ID!
+}
+
+type Contest_Prize {
+  contestId: Contest!
+  id: ID!
+  prizeImageURL: String!
+  title: String!
+  type: String!
+  userId: User!
+}
+
+input CreateAlbumInput {
+  name: String!
+  userId: ID!
+}
+
+input CreateCategoryInput {
+  name: String!
+}
+
+input CreateChatInput {
+  currentUserId: ID!
+  firstMessage: String!
+  isImage: Boolean!
+  userIDs: [ID]!
+}
+
+input CreateCommentInput {
+  content: String!
+  parentCommentId: ID
+  postId: ID
+  storyId: ID
+  userId: ID!
+}
+
+input CreateContestInput {
+  contestImageURL: String!
+  description: String!
+  endDate: String
+  name: String!
+  startDate: String!
+}
+
+input CreateContestPrizeInput {
+  prizeId: String
+  title: String
+  type: String
+}
+
+input CreateMessageInput {
+  chatId: ID!
+  isImage: Boolean!
+  message: String!
+  userId: ID!
+}
+
+input CreatePostInput {
+  ISO: String
+  albumId: [String]
+  aperture: String
+  camera: String
+  caption: String!
+  categoryId: [String]
+  contestId: String!
+  copyRight: String
+  focalLength: String
+  imageURL: String!
+  lens: String
+  postViewStatus: ViewStatus!
+  shutterSpeed: String
+  tag: [String]
+  takenWhen: String
+  title: String!
+  userId: ID!
+}
+
+input CreateReportInput {
+  postId: ID!
+  reason: String!
+  userId: ID!
+  userReported: ID!
+}
+
+input CreateStoryInput {
+  categoryId: [String]
+  content: String!
+  images: [String]!
+  storyViewStatus: ViewStatus!
+  tag: [String]
+  title: String!
+  userId: ID!
+}
+
+input CreateTagData {
+  name: [String]!
+}
+
+input CreateUserInput {
+  age: Int
+  backgroundImageURL: String
+  birthday: String
+  email: String!
+  hashPassword: String!
+  name: String!
+  phoneNumber: String
+  profileImageURL: String
+}
+
+input DeleteAlbumInput {
+  albumId: ID!
+}
+
+type DeleteAllReturnType {
+  count: Int!
+  message: String
+}
+
+input DeleteChatInput {
+  chatId: ID!
+}
+
+input DeleteCommentInput {
+  commentId: ID!
+}
+
+input DeleteContestInput {
+  contestId: ID!
+}
+
+input DeleteMessageInput {
+  reportId: ID!
+}
+
+input DeleteNotiInput {
+  notiId: ID!
+}
+
+input DeletePostInput {
+  postId: ID!
+}
+
+input DeleteReportInput {
+  reportId: ID!
+}
+
+input DeleteStoryInput {
+  storyId: ID!
+}
+
+input DeleteUserInput {
+  userId: ID!
+}
+
+input EndContestInput {
+  contestId: ID!
+}
+
+input EndorseSkillInput {
+  endorsementId: ID!
+  endorserUserId: ID!
+}
+
+type Endorsement {
+  endorsers: [User]
+  id: ID!
+  owner: User
+  skill: Skill
+}
+
+input ExplorePostsInput {
+  categoryIds: [String]
+}
+
+type Follower {
+  id: ID!
+  userFollower: [User]!
+  userId: User!
+}
+
+type Following {
+  id: ID!
+  userFollowing: [User]!
+  userId: User!
+}
+
+input GetCommentsByPostIdInput {
+  postId: ID!
+}
+
+input GetCommentsByStoryIdInput {
+  storyId: ID!
+}
+
+type Image {
+  createdAt: String!
+  hash: String!
+  id: ID!
+  imageInfoId: ImageInfo!
+  postConnection: Post!
+  updatedAt: String!
+  url: String!
+}
+
+type ImageInfo {
+  ISO: String
+  aperture: String
+  camera: String
+  copyRight: String
+  focalLength: String
+  id: ID!
+  imageId: Image!
+  lens: String
+  shutterSpeed: String
+  takenWhen: String
+}
+
+input InteractPostInput {
+  isLiked: Boolean!
+  likedUserId: ID!
+  postId: ID!
+}
+
+input InteractStoryInput {
+  isLiked: Boolean!
+  likedUserId: ID!
+  storyId: ID!
+}
+
+input InterestCategoriesInput {
+  categoryIds: [String]!
+  userId: ID!
+}
+
+input JoinContestInput {
+  contestId: ID!
+  userId: ID!
+}
+
+type Level {
+  currentLevel: Int!
+  currentXP: Int!
+  id: ID!
+  userId: User!
+}
+
+type Message {
+  chatId: Chat!
+  createdAt: String!
+  id: ID!
+  isImage: Boolean!
+  message: String!
+  userId: User!
+}
+
+type MessageConnection {
+  edges: [MessageEdge!]!
+  pageInfo: PageInfo!
+}
+
+type MessageEdge {
+  cursor: String!
+  node: Message
+}
+
+input MessageInfoInput {
+  messageId: ID!
+}
+
+type Mutation {
+  _TEST_MUTATION: Int!
+  addBiography(data: AddBiographyInput!): User!
+  addInterestCategories(data: InterestCategoriesInput!): User!
+  addNewPhotoToAlbum(data: UpdateAlbumInput!): Album!
+  addSkillDefinedList(data: AddSkillDefinedListInput): String
+  checkSimilarPosts(post1Id: String, post2Id: String): checkSimilarPostsDetails!
+  createAlbum(data: CreateAlbumInput!): Album!
+  createCategory(data: CreateCategoryInput!): Category!
+  createChat(data: CreateChatInput!): Chat!
+  createComment(data: CreateCommentInput!): Comment!
+  createContest(data: CreateContestInput!): Contest!
+  createMessage(data: CreateMessageInput!): Message!
+  createPost(data: CreatePostInput!): Post!
+  createReport(data: CreateReportInput!): Report!
+  createStory(data: CreateStoryInput!): Story!
+  createTag(data: CreateTagData!): [Tag]!
+  createUser(data: CreateUserInput!): User!
+  deleteAlbum(data: DeleteAlbumInput!): Album!
+  deleteAllAlbum: DeleteAllReturnType!
+  deleteAllChat: DeleteAllReturnType!
+  deleteAllMessage: DeleteAllReturnType!
+  deleteAllNoti: DeleteAllReturnType!
+  deleteAllPost: DeleteAllReturnType!
+  deleteAllReport: DeleteAllReturnType!
+  deleteAllStory: DeleteAllReturnType!
+  deleteAllTag: DeleteAllReturnType!
+  deleteAllUser: DeleteAllReturnType!
+  deleteChat(data: DeleteChatInput!): Chat!
+  deleteComment(data: DeleteCommentInput!): Comment!
+  deleteContest(data: DeleteContestInput!): Contest!
+  deleteMessage(data: DeleteMessageInput!): Message!
+  deleteNoti(data: DeleteNotiInput!): Notification!
+  deletePost(data: DeletePostInput!): Post!
+  deleteReport(data: DeleteReportInput!): Report!
+  deleteStory(data: DeleteStoryInput!): Story!
+  deleteUser(data: DeleteUserInput!): User!
+  endContest(data: EndContestInput!): Contest!
+  endorseSkill(data: EndorseSkillInput!): User!
+  hashImageWithPostIds(data: hashImageWithPostIdsInput): String!
+  interactPost(data: InteractPostInput!): Post!
+  interactStory(data: InteractStoryInput!): Story!
+  joinContest(data: JoinContestInput!): Contest!
+  removeInterestCategories(data: InterestCategoriesInput!): User!
+  reportedPost(data: ReportPostInput!): Post!
+  reportedStory(data: ReportStoryInput!): Story!
+  setSkills(data: SetSkillInput!): User!
+  unEndorseSkill(data: EndorseSkillInput!): User!
+  unfollowUser(data: UnfollowInput!): Following!
+  updateComment(data: UpdateCommentInput!): Comment!
+  updateFollowing(data: UpdateFollowingInput!): Following!
+  updateLevel(data: UpdateLevelInput!): Level!
+  updatePost(data: UpdatePostInput!): Post!
+  updateStory(data: UpdateStoryInput!): Story!
+  updateUser(data: UpdateUserInput!): User!
+  voteComment(data: VoteCommentInput!): Comment!
+}
+
+input NotInAlbumInfoInput {
+  albumId: ID!
+  userId: ID!
+}
+
+type Notification {
+  createdAt: String!
+  id: ID!
+  postId: String!
+  postImage: String!
+  postTitle: String!
+  type: String!
+  userIds: [User]!
+  userTriggerId: User!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Post {
+  albumId: [Album]!
+  caption: String!
+  categoryId: [Category]!
+  comments: [Comment]!
+  contestId: String
+  createdAt: String!
+  id: ID!
+  image: Image!
+  points: Int!
+  postViewStatus: ViewStatus!
+  reportedUserIds: [String]!
+  tag: [String]!
+  title: String!
+  updatedAt: String!
+  userId: User!
+  userLikedPost: [String]!
+}
+
+type PostConnection {
+  edges: [PostEdge!]!
+  pageInfo: PageInfo!
+  timeCall: Int!
+}
+
+type PostEdge {
+  cursor: String!
+  node: Post
+}
+
+input PostInfoInput {
+  postId: ID!
+}
+
+type PostPagination {
+  edges: [PostEdge!]!
+  pageInfo: PageInfo!
+}
+
+input ProfileInfoInput {
+  userId: ID!
+}
+
+type Query {
+  _TEST_QUERY: String
+  albumInfo(data: AlbumInfoInput!): [Post]!
+  allAlbums: [Album]!
+  allCategories: [Category]!
+  allChats: [Chat]!
+  allContests: [Contest]!
+  allFollower: [Follower]!
+  allFollowing: [Following]!
+  allImageInfos: [ImageInfo]!
+  allImages: [Image]!
+  allLevels: [Level]!
+  allMessages: [Message]!
+  allNotis: [Notification]!
+  allPosts: [Post]!
+  allReports: [Report]!
+  allStories: [Story]!
+  allTags: [Tag]!
+  allUsers: [User]!
+  categoryInfo(data: CategoryInfoInput!): Category!
+  chatInfo(data: ChatInfoInput!): Chat!
+  chatInfoByUserId(data: ChatInfoByUserIdInput!): [Chat]
+  contestInfo(data: ContestInfoInput!): Contest!
+  contestPosts(after: String, contestId: String, userId: String): PostConnection!
+  explorePosts(after: String, data: ExplorePostsInput, limit: Int): PostPagination!
+  getAllUserLeaderboard: [User]!
+  getAllUserPosts(after: String, currentUserId: String, userId: String): PostConnection!
+  getAllUserStories(after: String, currentUserId: String, userId: String): StoryConnection!
+  getChatMessage(after: String, chatId: String): MessageConnection!
+  getCommentChild(id: ID!): Comment!
+  getCommentsByPostId(after: String, data: GetCommentsByPostIdInput, limit: Int): CommentPagination!
+  getCommentsByStoryId(after: String, data: GetCommentsByStoryIdInput, limit: Int): CommentPagination!
+  getImageById(id: String!): Image!
+  getNewFeed(after: String, categoryIds: [String], timeCall: Int, userId: String): PostConnection!
+  getNewStories(after: String, limit: Int): StoryConnection!
+  getSkillDefinedList: [Skill]!
+  getTopContestPosts(data: ContestInfoInput!): [Post]!
+  getUserFollowingLeaderBoard(data: UserFollowingLeaderInput!): [User]!
+  messageInfo(data: MessageInfoInput!): Message!
+  postInfo(data: PostInfoInput!): Post!
+  postNotInAlbum(data: NotInAlbumInfoInput!): [Post]!
+  reportInfo(data: ReportInfoInput!): Report!
+  searchQuery(data: SearchQueryInput!): SearchReturnType!
+  searchResult(data: SearchQueryInput!): SearchReturnType!
+  similarPosts(after: String, data: SimilarPostsInput!, limit: Int): PostPagination!
+  storyInfo(data: StoryInfoInput!): Story!
+  suggestTags: [Tag]!
+  suggestUserToFollow(after: String, data: SuggestUserToFollowInput!, limit: Int): UserPagination!
+  tagInfo(data: TagInfoInput!): Tag!
+  userAllAlbum(data: UserAllAlbumInput!): [Album]!
+  userFollow(data: UserInfoInput!): UserFollow!
+  userFollowerInfo(data: UserFollowerInfoInput!): Follower!
+  userFollowingInfo(data: UserFollowingInfoInput!): Following!
+  userInfo(data: UserInfoInput!): User!
+  userLevel(data: UserLevelInput!): Level!
+  userNotis(data: UserNotiInfoInput!): [Notification]!
+  verifyUser(data: VerifyUserInput!): User!
+}
+
+type Report {
+  createdAt: String!
+  id: ID!
+  isFinished: Boolean!
+  postId: ID!
+  reason: String!
+  updatedAt: String!
+  userId: ID!
+  userReported: ID!
+}
+
+input ReportInfoInput {
+  reportId: ID!
+}
+
+input ReportPostInput {
+  postId: ID!
+  userId: ID!
+}
+
+input ReportStoryInput {
+  storyId: ID!
+  userId: ID!
+}
+
+input SearchQueryInput {
+  searchString: String!
+  userId: ID!
+}
+
+type SearchReturnType {
+  posts: [Post]!
+  stories: [Story]!
+  tags: [Tag]!
+  users: [User]!
+}
+
+input SetSkillInput {
+  skillIds: [String]!
+  userId: ID!
+}
+
+input SimilarPostsInput {
+  postId: String!
+}
+
+type Skill {
+  endorsements: [Endorsement]
+  id: ID!
+  name: String!
+}
+
+type Story {
+  categoryId: [Category]!
+  comments: [Comment]!
+  content: String!
+  createdAt: String!
+  id: ID!
+  images: [String]!
+  points: Int!
+  reportedUserIds: [String]!
+  storyViewStatus: ViewStatus!
+  tag: [String]!
+  title: String!
+  updatedAt: String!
+  userId: User!
+  userLikedStory: [String]!
+}
+
+type StoryConnection {
+  edges: [StoryEdge!]!
+  pageInfo: PageInfo!
+}
+
+type StoryEdge {
+  cursor: String!
+  node: Story
+}
+
+input StoryInfoInput {
+  storyId: ID!
+}
+
+type Subscription {
+  _TEST_SUBCRIPTION: Int!
+  createdMessage(chatId: String): Message
+  updateStatusChat(userId: String): Chat
+}
+
+input SuggestUserToFollowInput {
+  userId: ID!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  posts: [Post]!
+}
+
+input TagInfoInput {
+  tag: String!
+}
+
+input UnfollowInput {
+  followingId: ID!
+  userId: ID!
+}
+
+input UpdateAlbumInput {
+  albumId: ID!
+  postIds: [ID]!
+}
+
+input UpdateCommentInput {
+  commentId: ID!
+  content: String!
+}
+
+input UpdateFollowingInput {
+  followingId: ID!
+  userId: ID!
+}
+
+input UpdateLevelInput {
+  userId: ID!
+  xp: Int!
+}
+
+input UpdatePostInput {
+  caption: String
+  postId: ID!
+  postViewStatus: ViewStatus
+  title: String
+}
+
+input UpdateReportInput {
+  isFinished: Boolean!
+  reportId: ID!
+}
+
+input UpdateStoryInput {
+  content: String
+  storyId: ID!
+  title: String
+}
+
+input UpdateUserInput {
+  age: Int
+  backgroundImageURL: String
+  birthday: String
+  email: String
+  hashPassword: String
+  name: String
+  phoneNumber: String
+  profileImageURL: String
+  userId: ID!
+}
+
+type User {
+  age: Int!
+  albums: [Album]!
+  backgroundImageURL: String!
+  biography: String
+  birthday: String!
+  chatIDs: [Chat]!
+  contestPrizeList: [Contest_Prize]!
+  createdAt: String!
+  email: String!
+  hashPassword: String!
+  id: ID!
+  interestCategories: [Category]
+  isAdmin: Int!
+  joinedContestIds: [Contest]!
+  level: Level!
+  messages: [Message]!
+  name: String!
+  notiIds: [Notification]!
+  phoneNumber: String!
+  posts: [Post]!
+  profileImageURL: String!
+  stories: [Story]!
+  updatedAt: String
+  userEndorsements: [Endorsement]
+}
+
+input UserAllAlbumInput {
+  userId: ID!
+}
+
+input UserAllCategoryInput {
+  userId: ID!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User
+}
+
+type UserFollow {
+  follower: Follower!
+  following: Following!
+}
+
+input UserFollowerInfoInput {
+  userId: ID!
+}
+
+input UserFollowingInfoInput {
+  userId: ID!
+}
+
+input UserFollowingLeaderInput {
+  userId: ID!
+}
+
+input UserInfoInput {
+  userId: ID!
+}
+
+input UserLevelInput {
+  userId: ID!
+}
+
+input UserNotiInfoInput {
+  userId: ID!
+}
+
+type UserPagination {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+}
+
+input VerifyUserInput {
+  email: String!
+  hashPassword: String!
+}
+
+enum ViewStatus {
+  ONLY_FOLLOWERS
+  PRIVATE
+  PUBLIC
+}
+
+input VoteCommentInput {
+  action: voteCommentAction!
+  commentId: ID!
+  userId: ID!
+}
+
+type checkSimilarPostsDetails {
+  isSimilar: Boolean
+  post1Imageurl: String
+  post2ImageUrl: String
+}
+
+input hashImageWithPostIdsInput {
+  postIds: [String]
+}
+
+enum voteCommentAction {
+  CANCEL
+  DOWNVOTE
+  UPVOTE
+}

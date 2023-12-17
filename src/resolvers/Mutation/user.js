@@ -15,6 +15,8 @@ const userMutation = {
           phoneNumber: '',
           isAdmin: 0,
           age: 18,
+          notiIds: [],
+          contestPrizeList: [],
           level: {
             create: {
               currentXP: 0,
@@ -34,14 +36,13 @@ const userMutation = {
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
-
+      console.log(e);
       throw e;
     }
     return user;
   },
+
+  // TODO: Update delele User that lead to all records relate to user also be deleted
   deleteUser: async (parent, args, info) => {
     let user;
     try {
@@ -51,9 +52,7 @@ const userMutation = {
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -64,9 +63,7 @@ const userMutation = {
     try {
       result = await prisma.user.deleteMany({});
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -86,13 +83,122 @@ const userMutation = {
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
     return updatedUser;
+  },
+
+  /**
+   * @param {*} parent
+   * @param {{data: {categoryIds: string[], userId: string}}} args
+   * @param {*} info
+   * @returns
+   */
+  addInterestCategories: async (parent, args, info) => {
+    const { categoryIds, userId } = args.data;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        interestCategories: true,
+      },
+    });
+    if (!user) {
+      throw Error('User is not existed');
+    }
+
+    categoryIds.forEach((id) => {
+      if (user.interestCategoryIds.includes(id)) {
+        throw Error('User has already added this category to interest');
+      }
+    });
+
+    const existedCategories = await prisma.category.findMany({
+      where: {
+        id: {
+          in: categoryIds,
+        },
+      },
+    });
+
+    if (existedCategories.length !== categoryIds.length) {
+      throw Error('Some of category not existed');
+    }
+
+    return await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        interestCategories: {
+          connect: categoryIds.map((id) => {
+            return {
+              id: id,
+            };
+          }),
+        },
+      },
+    });
+  },
+
+  /**
+   * @param {*} parent
+   * @param {{data: {categoryIds: string, userId: string}}} args
+   * @param {*} info
+   * @returns
+   */
+  removeInterestCategories: async (parent, args, info) => {
+    const { categoryIds, userId } = args.data;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        interestCategories: true,
+      },
+    });
+
+    if (!user) {
+      throw Error('User is not existed');
+    }
+
+    categoryIds.forEach((id) => {
+      if (!user.interestCategoryIds.includes(id)) {
+        throw Error('User has not added this category to interest');
+      }
+    });
+
+    const existedCategories = await prisma.category.findMany({
+      where: {
+        id: {
+          in: categoryIds,
+        },
+      },
+    });
+
+    if (existedCategories.length !== categoryIds.length) {
+      throw Error('Some of category not existed');
+    }
+
+    return await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        interestCategories: {
+          disconnect: categoryIds.map((id) => {
+            return {
+              id: id,
+            };
+          }),
+        },
+      },
+    });
   },
 };
 

@@ -8,15 +8,16 @@ const storyMutation = {
         data: {
           userId: args.data.userId,
           title: args.data.title,
+          storyViewStatus: args.data.storyViewStatus,
           content: args.data.content,
+          categoryId: args.data.categoryId ? args.data.categoryId : [],
+          tag: args.data.tag ? args.data.tag : [],
           images: args.data.images,
           points: 0,
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -31,9 +32,7 @@ const storyMutation = {
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -44,9 +43,7 @@ const storyMutation = {
     try {
       result = await prisma.story.deleteMany({});
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -79,66 +76,66 @@ const storyMutation = {
     let story;
 
     if (args.data.isLiked) {
-      try {
-        story = await prisma.story.update({
-          where: {
-            id: args.data.storyId,
+      story = await prisma.story.update({
+        where: {
+          id: args.data.storyId,
+        },
+        data: {
+          points: {
+            increment: 1,
           },
-          data: {
-            points: {
-              increment: 1,
-            },
-            userLikedStory: {
-              push: args.data.likedUserId,
-            },
+          userLikedStory: {
+            push: args.data.likedUserId,
           },
-        });
-      } catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          console.log(e);
-        }
-        throw e;
-      }
+        },
+      });
     } else {
-      try {
-        const { userLikedStory } = await prisma.story.findUnique({
-          where: {
-            id: args.data.storyId,
-          },
-        });
-        console.log(userLikedStory);
+      const { userLikedStory } = await prisma.story.findUnique({
+        where: {
+          id: args.data.storyId,
+        },
+      });
+      console.log(userLikedStory);
 
-        story = await prisma.story.update({
+      story = await prisma.story.update({
+        where: {
+          id: args.data.storyId,
+        },
+        data: {
+          points: {
+            increment: -1,
+          },
+          userLikedStory: {
+            set: userLikedStory.filter((id) => id !== args.data.likedUserId),
+          },
+        },
+      });
+
+      if (story.points == -1) {
+        story = await prisma.post.update({
           where: {
             id: args.data.storyId,
           },
           data: {
-            points: {
-              increment: -1,
-            },
-            userLikedStory: {
-              set: userLikedStory.filter((id) => id !== args.data.likedUserId),
-            },
+            points: 0,
           },
         });
-
-        if (story.points == -1) {
-          story = await prisma.post.update({
-            where: {
-              id: args.data.storyId,
-            },
-            data: {
-              points: 0,
-            },
-          });
-        }
-      } catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          console.log(e);
-        }
-        throw e;
       }
     }
+
+    return story;
+  },
+  reportedStory: async (parent, args, info) => {
+    let story;
+
+    story = await prisma.story.update({
+      where: {
+        id: args.data.storyId,
+      },
+      data: {
+        reportedUserIds: { push: args.data.userId },
+      },
+    });
 
     return story;
   },

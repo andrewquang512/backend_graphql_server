@@ -1,15 +1,15 @@
-service: apollo-lambda
+service: images-social-server
 provider:
   name: aws
   runtime: nodejs16.x
   httpApi:
     cors: true
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
 functions:
   graphql:
-    # Make sure your file path is correct!
-    # (e.g., if your file is in the root folder use server.graphqlHandler )
-    # The format is: <FILENAME>.<HANDLER>
-    handler: src/handler.handler # highlight-line
+    handler: dist/handler.handler
     events:
       - httpApi:
           path: /
@@ -17,3 +17,6 @@ functions:
       - httpApi:
           path: /
           method: GET
+plugins:
+  - serverless-offline
+  - serverless-webpack

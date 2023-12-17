@@ -1,8 +1,10 @@
 import gql from 'graphql-tag';
+import commonDefs from './Common_Common.js';
 
 const imageDefs = gql`
   extend type Query {
     allImages: [Image]!
+    getImageById(id: String!): Image!
   }
 
   # extend type Mutation {
@@ -17,7 +19,7 @@ const imageDefs = gql`
     createdAt: String!
     updatedAt: String!
 
-    postId: Post!
+    postConnection: Post!
     imageInfoId: ImageInfo!
   }
 `;

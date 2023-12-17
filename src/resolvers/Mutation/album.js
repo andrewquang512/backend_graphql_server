@@ -11,9 +11,7 @@ const albumMutation = {
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -28,9 +26,7 @@ const albumMutation = {
         },
       });
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
@@ -41,36 +37,34 @@ const albumMutation = {
     try {
       result = await prisma.album.deleteMany({});
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+      console.log(e);
       throw e;
     }
 
     return result;
   },
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  updateAlbum: async (parent, args, info) => {
-    const { updatedUser, ...updateInfo } = args.data;
-    let result;
-    try {
-      updatedUser = await prisma.user.update({
-        where: {
-          id: userId,
-        },
-        data: {
-          ...updateInfo,
-        },
-      });
-    } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(e);
-      }
+  addNewPhotoToAlbum: async (parent, args, info) => {
+    const { albumId, postIds } = args.data;
 
-      throw e;
-    }
+    await prisma.post.updateMany({
+      where: {
+        id: {
+          in: postIds,
+        },
+      },
+      data: {
+        albumId: {
+          push: albumId,
+        },
+      },
+    });
 
-    return updatedUser;
+    return await prisma.album.findUnique({
+      where: {
+        id: albumId,
+      },
+    });
   },
 };
 

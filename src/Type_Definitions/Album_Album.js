@@ -4,7 +4,8 @@ const albumDefs = gql`
   extend type Query {
     allAlbums: [Album]!
     userAllAlbum(data: UserAllAlbumInput!): [Album]!
-    albumInfo(data: AlbumInfoInput!): Album!
+    albumInfo(data: AlbumInfoInput!): [Post]!
+    postNotInAlbum(data: NotInAlbumInfoInput!): [Post]!
   }
 
   input UserAllAlbumInput {
@@ -12,6 +13,13 @@ const albumDefs = gql`
   }
 
   input AlbumInfoInput {
+    currentUserId: ID!
+    userId: ID!
+    albumId: ID!
+  }
+
+  input NotInAlbumInfoInput {
+    userId: ID!
     albumId: ID!
   }
 
@@ -21,7 +29,7 @@ const albumDefs = gql`
     deleteAlbum(data: DeleteAlbumInput!): Album!
     deleteAllAlbum: DeleteAllReturnType!
 
-    updateAlbum(data: UpdateAlbumInput!): Album!
+    addNewPhotoToAlbum(data: UpdateAlbumInput!): Album!
   }
 
   input CreateAlbumInput {
@@ -35,15 +43,8 @@ const albumDefs = gql`
 
   input UpdateAlbumInput {
     albumId: ID!
-    name: String!
+    postIds: [ID]!
   }
-
-  #   input UpdatePostInput {
-  #     postId: ID!
-  #     title: String
-  #     body: String
-  #     published: Boolean
-  #   }
 
   type Album {
     id: ID!

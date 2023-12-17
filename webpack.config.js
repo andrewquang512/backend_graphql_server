@@ -1,23 +1,50 @@
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { resolve } from 'path';
+
 export default {
-  target: 'node',
-  entry: './src/handler.js',
+  entry: {
+    handler: './src/handler.js',
+  },
   mode: 'production',
   output: {
     filename: 'handler.js',
-    libraryTarget: 'commonjs2',
+    library: {
+      type: 'commonjs2',
+    },
+    publicPath: '',
+    globalObject: 'this',
   },
+  resolve: {
+    mainFields: ['module', 'main'],
+  },
+  externalsPresets: { node: true },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /.*\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
+        },
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: [resolve('src/index.js')],
+        use: {
+          loader: 'babel-loader',
         },
       },
     ],
+  },
+  plugins: [
+    new CopyWebpackPlugin({ patterns: ['./src/prisma/schema.prisma'] }),
+  ],
+  devServer: {
+    proxy: {
+      '/websocket': {
+        target: 'ws://[address]:[port]',
+        ws: true, // important
+      },
+    },
   },
 };
