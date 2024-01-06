@@ -20,6 +20,7 @@ jobs:
       with:
         fetch-depth: '0'
     - name: git
+      run: |
         git --version
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
