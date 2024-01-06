@@ -1,0 +1,6 @@
+overwrite: true
+schema: "https://roxqm2ljb8.execute-api.ap-southeast-1.amazonaws.com/"
+generates:
+  schema.graphql:
+    plugins:
+      - "schema-ast"
