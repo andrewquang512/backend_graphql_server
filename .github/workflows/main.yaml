@@ -14,8 +14,12 @@ on:
 jobs:
   sync:
       runs-on: ubuntu-latest
-      steps:
-      - run: |
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: git
+        run: |
           git --version
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
