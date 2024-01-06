@@ -22,10 +22,12 @@ jobs:
     - name: git
       run: |
         git --version
-        git config user.name "GitHub Actions Bot"
-        git config user.email "andrew.viquang@gmail.com"
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "andrew.viquang@gmail.com"
         git clone https://andrewquang512:${{ secrets.MY_PAT }}@github.com/andrewquang512/backend_graphql_server.git --branch=mirror mirror
         cd mirror
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "andrew.viquang@gmail.com"
         git remote add src https://andrewquang512:${{ secrets.MY_PAT }}@github.com/andrewquang512/experimentLab.git
         git fetch src
         git checkout -b experiment_deploy_apollo src/experiment_deploy_apollo
