@@ -16,15 +16,18 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-      - name: repo-sync
-        uses: repo-sync/github-sync@v2
-        with:
-          source_repo: "https://${{ secrets.MY_PAT }}@github.com/andrewquang512/backend_graphql_server"
-          source_branch: "mirror"
-          destination_branch: "https://${{ secrets.MY_PAT }}@github.com/andrewquang512/experimentLab"
-          github_token: ${{ secrets.MY_PAT }}
+        run: |
+        git --version
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+        git clone https://andrewquang512:${{ secrets.MY_PAT }}@github.com/andrewquang512/backend_graphql_server.git --branch=mirror mirror
+        cd mirror
+        git remote add src https://andrewquang512:${{ secrets.MY_PAT }}@github.com/andrewquang512/experimentLab.git
+        git fetch src
+        git checkout -b experiment_deploy_apollo src/experiment_deploy_apollo
+        git checkout mirror
+        git merge experiment_deploy_apollo --allow-unrelated-histories
+        git push origin -u mirror 
 
 # jobs:
 #   build-and-deploy:
