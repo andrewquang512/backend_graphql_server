@@ -12,7 +12,9 @@ const postMutation = {
           userId: args.data.userId,
         },
       });
-      console.log({ follower });
+      console.log({
+        follower,
+      });
 
       post = await prisma.post.create({
         data: {
@@ -49,7 +51,9 @@ const postMutation = {
           },
         },
       });
-      console.log({ post });
+      console.log({
+        post,
+      });
 
       const a = await prisma.notification.create({
         data: {
@@ -61,7 +65,9 @@ const postMutation = {
           userIds: follower.userFollower,
         },
       });
-      console.log({ a });
+      console.log({
+        a,
+      });
 
       sendNotificationToClient(
         [
@@ -70,7 +76,10 @@ const postMutation = {
         ],
         {
           title: 'Notify new post',
-          body: JSON.stringify({ post, follower }),
+          body: JSON.stringify({
+            post,
+            follower,
+          }),
         },
       );
     } catch (e) {
@@ -148,9 +157,13 @@ const postMutation = {
         where: {
           id: args.data.postId,
         },
-        include: { image: true },
+        include: {
+          image: true,
+        },
       });
-      console.log({ b });
+      console.log({
+        b,
+      });
 
       const a = await prisma.notification.create({
         data: {
@@ -162,7 +175,9 @@ const postMutation = {
           userIds: [post.userId],
         },
       });
-      console.log({ a });
+      console.log({
+        a,
+      });
 
       sendNotificationToClient(
         [
@@ -171,7 +186,10 @@ const postMutation = {
         ],
         {
           title: 'Notify user like post',
-          body: JSON.stringify({ post, likedUserId: args.data.likedUserId }),
+          body: JSON.stringify({
+            post,
+            likedUserId: args.data.likedUserId,
+          }),
         },
       );
     } else {
@@ -212,14 +230,18 @@ const postMutation = {
   },
   reportedPost: async (parent, args, info) => {
     let post;
-    console.log({ args });
+    console.log({
+      args,
+    });
 
     post = await prisma.post.update({
       where: {
         id: args.data.postId,
       },
       data: {
-        reportedUserIds: { push: args.data.userId },
+        reportedUserIds: {
+          push: args.data.userId,
+        },
       },
     });
 

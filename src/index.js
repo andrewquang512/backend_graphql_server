@@ -53,20 +53,34 @@ export async function bootstrap(port) {
     path: '/',
   });
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
-  const serverCleanup = useServer({ schema }, wsServer);
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
+  const serverCleanup = useServer(
+    {
+      schema,
+    },
+    wsServer,
+  );
 
   const server = new ApolloServer({
     schema,
     context: () => {
-      return { prisma };
+      return {
+        prisma,
+      };
     },
     introspection: true,
     csrfPrevention: true,
     plugins: [
-      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+      ApolloServerPluginLandingPageLocalDefault({
+        embed: true,
+      }),
       ...(parseInt(process.env.IS_LOGGING) ? [loggingPlugin] : []),
-      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginDrainHttpServer({
+        httpServer,
+      }),
       {
         async serverWillStart() {
           return {
@@ -81,7 +95,7 @@ export async function bootstrap(port) {
   });
 
   await server.start();
-
+  const est = true;
   app.use('/', cors(), express.json(), expressMiddleware(server));
 
   httpServer.listen(port, () => {

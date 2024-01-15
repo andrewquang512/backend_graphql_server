@@ -102,8 +102,12 @@ const storyQuery = {
           where: {
             userId: args.userId,
             OR: [
-              { storyViewStatus: 'PUBLIC' },
-              { storyViewStatus: 'ONLY_FOLLOWERS' },
+              {
+                storyViewStatus: 'PUBLIC',
+              },
+              {
+                storyViewStatus: 'ONLY_FOLLOWERS',
+              },
             ],
           },
           orderBy: {
@@ -138,7 +142,9 @@ const storyQuery = {
         cursor: story.id,
       }));
 
-      console.log({ nodes });
+      console.log({
+        nodes,
+      });
     }
 
     const hasNextPage =

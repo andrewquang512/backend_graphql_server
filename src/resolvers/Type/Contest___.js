@@ -4,7 +4,9 @@ const Contest = {
   joinedUserIds: async (parent, args, info) => {
     return await prisma.user.findMany({
       where: {
-        id: { in: parent.joinedUserIds },
+        id: {
+          in: parent.joinedUserIds,
+        },
       },
     });
   },

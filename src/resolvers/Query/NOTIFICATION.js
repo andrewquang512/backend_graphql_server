@@ -7,7 +7,9 @@ const notiQuery = {
   userNotis: async (parent, args, info) => {
     return await prisma.notification.findMany({
       where: {
-        userIds: { has: args.data.userId },
+        userIds: {
+          has: args.data.userId,
+        },
       },
       orderBy: [
         {

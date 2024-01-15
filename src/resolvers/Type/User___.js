@@ -32,14 +32,18 @@ const User = {
   notiIds: async (parent, args, info) => {
     return await prisma.album.findMany({
       where: {
-        userIds: { has: parent.id },
+        userIds: {
+          has: parent.id,
+        },
       },
     });
   },
   joinedContestIds: async (parent, args, info) => {
     return await prisma.contest.findMany({
       where: {
-        id: { in: parent.joinedContestIds },
+        id: {
+          in: parent.joinedContestIds,
+        },
       },
     });
   },
@@ -53,7 +57,9 @@ const User = {
   chatIDs: async (parent, args, info) => {
     return await prisma.chat.findMany({
       where: {
-        userIDs: { has: parent.id },
+        userIDs: {
+          has: parent.id,
+        },
       },
       orderBy: {
         lastMessageAt: 'desc',

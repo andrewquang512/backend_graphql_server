@@ -4,14 +4,18 @@ const Chat = {
   userIDs: async (parent, args, info) => {
     return await prisma.user.findMany({
       where: {
-        id: { in: parent.userIDs },
+        id: {
+          in: parent.userIDs,
+        },
       },
     });
   },
   messages: async (parent, args, info) => {
     return await prisma.message.findMany({
       where: {
-        id: { in: parent.messages },
+        id: {
+          in: parent.messages,
+        },
       },
       orderBy: {
         createdAt: 'desc',

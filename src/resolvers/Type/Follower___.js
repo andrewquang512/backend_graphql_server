@@ -11,7 +11,9 @@ const Follower = {
   userFollower: async (parent, args, info) => {
     return await prisma.user.findMany({
       where: {
-        id: { in: parent.userFollower },
+        id: {
+          in: parent.userFollower,
+        },
       },
     });
   },

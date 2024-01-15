@@ -7,7 +7,10 @@
         "eslint:recommended",
         "plugin:prettier/recommended"
       ],
-    "ignorePatterns": [".eslintrc.js", "____Legacy/**","dist/**", "node_modules/**"],
+    "ignorePatterns": [".eslintrc.js", "____Legacy/**","dist/**", "node_modules/**", "schema.prisma"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "root": true,
     "parserOptions": {
         "project": "jsconfig.json",
         "sourceType": "module",

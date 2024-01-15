@@ -133,7 +133,9 @@ const storyMutation = {
         id: args.data.storyId,
       },
       data: {
-        reportedUserIds: { push: args.data.userId },
+        reportedUserIds: {
+          push: args.data.userId,
+        },
       },
     });
 

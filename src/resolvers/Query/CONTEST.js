@@ -29,7 +29,9 @@ const contestQuery = {
         contestId: contestId,
       },
       orderBy: [
-        { points: 'desc' },
+        {
+          points: 'desc',
+        },
         {
           createdAt: 'desc',
         },
@@ -37,7 +39,9 @@ const contestQuery = {
     });
 
     a = _.sortBy(a, ({ userId }) => (userId === currentUserId ? 0 : 1));
-    console.log({ a });
+    console.log({
+      a,
+    });
 
     if (!after) {
       nodes = a.slice(0, 4).map((post) => ({
@@ -45,7 +49,9 @@ const contestQuery = {
         cursor: post.id,
       }));
 
-      console.log({ nodes });
+      console.log({
+        nodes,
+      });
     } else {
       const index = a.findIndex((post) => post.id === after);
       nodes = a.slice(index + 1, index + 3).map((post) => ({
@@ -53,7 +59,9 @@ const contestQuery = {
         cursor: post.id,
       }));
 
-      console.log({ nodes });
+      console.log({
+        nodes,
+      });
     }
 
     const hasNextPage =
@@ -105,7 +113,9 @@ const contestQuery = {
         contestId: args.data.contestId,
       },
       orderBy: [
-        { points: 'desc' },
+        {
+          points: 'desc',
+        },
         {
           createdAt: 'desc',
         },

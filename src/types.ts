@@ -1,19 +1,51 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends {
+    [key: string]: unknown;
+  },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
+  ID: {
+    input: string;
+    output: string;
+  };
+  String: {
+    input: string;
+    output: string;
+  };
+  Boolean: {
+    input: boolean;
+    output: boolean;
+  };
+  Int: {
+    input: number;
+    output: number;
+  };
+  Float: {
+    input: number;
+    output: number;
+  };
 };
 
 export type AddBiographyInput = {
@@ -454,227 +486,182 @@ export type Mutation = {
   voteComment: Comment;
 };
 
-
 export type MutationAddBiographyArgs = {
   data: AddBiographyInput;
 };
-
 
 export type MutationAddInterestCategoriesArgs = {
   data: InterestCategoriesInput;
 };
 
-
 export type MutationAddNewPhotoToAlbumArgs = {
   data: UpdateAlbumInput;
 };
 
-
 export type MutationAddSkillDefinedListArgs = {
   data?: InputMaybe<AddSkillDefinedListInput>;
 };
-
 
 export type MutationCheckSimilarPostsArgs = {
   post1Id?: InputMaybe<Scalars['String']['input']>;
   post2Id?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type MutationCreateAlbumArgs = {
   data: CreateAlbumInput;
 };
-
 
 export type MutationCreateCategoryArgs = {
   data: CreateCategoryInput;
 };
 
-
 export type MutationCreateChatArgs = {
   data: CreateChatInput;
 };
-
 
 export type MutationCreateCommentArgs = {
   data: CreateCommentInput;
 };
 
-
 export type MutationCreateContestArgs = {
   data: CreateContestInput;
 };
-
 
 export type MutationCreateMessageArgs = {
   data: CreateMessageInput;
 };
 
-
 export type MutationCreatePostArgs = {
   data: CreatePostInput;
 };
-
 
 export type MutationCreateReportArgs = {
   data: CreateReportInput;
 };
 
-
 export type MutationCreateStoryArgs = {
   data: CreateStoryInput;
 };
-
 
 export type MutationCreateTagArgs = {
   data: CreateTagData;
 };
 
-
 export type MutationCreateUserArgs = {
   data: CreateUserInput;
 };
-
 
 export type MutationDeleteAlbumArgs = {
   data: DeleteAlbumInput;
 };
 
-
 export type MutationDeleteChatArgs = {
   data: DeleteChatInput;
 };
-
 
 export type MutationDeleteCommentArgs = {
   data: DeleteCommentInput;
 };
 
-
 export type MutationDeleteContestArgs = {
   data: DeleteContestInput;
 };
-
 
 export type MutationDeleteMessageArgs = {
   data: DeleteMessageInput;
 };
 
-
 export type MutationDeleteNotiArgs = {
   data: DeleteNotiInput;
 };
-
 
 export type MutationDeletePostArgs = {
   data: DeletePostInput;
 };
 
-
 export type MutationDeleteReportArgs = {
   data: DeleteReportInput;
 };
-
 
 export type MutationDeleteStoryArgs = {
   data: DeleteStoryInput;
 };
 
-
 export type MutationDeleteUserArgs = {
   data: DeleteUserInput;
 };
-
 
 export type MutationEndContestArgs = {
   data: EndContestInput;
 };
 
-
 export type MutationEndorseSkillArgs = {
   data: EndorseSkillInput;
 };
-
 
 export type MutationHashImageWithPostIdsArgs = {
   data?: InputMaybe<HashImageWithPostIdsInput>;
 };
 
-
 export type MutationInteractPostArgs = {
   data: InteractPostInput;
 };
-
 
 export type MutationInteractStoryArgs = {
   data: InteractStoryInput;
 };
 
-
 export type MutationJoinContestArgs = {
   data: JoinContestInput;
 };
-
 
 export type MutationRemoveInterestCategoriesArgs = {
   data: InterestCategoriesInput;
 };
 
-
 export type MutationReportedPostArgs = {
   data: ReportPostInput;
 };
-
 
 export type MutationReportedStoryArgs = {
   data: ReportStoryInput;
 };
 
-
 export type MutationSetSkillsArgs = {
   data: SetSkillInput;
 };
-
 
 export type MutationUnEndorseSkillArgs = {
   data: EndorseSkillInput;
 };
 
-
 export type MutationUnfollowUserArgs = {
   data: UnfollowInput;
 };
-
 
 export type MutationUpdateCommentArgs = {
   data: UpdateCommentInput;
 };
 
-
 export type MutationUpdateFollowingArgs = {
   data: UpdateFollowingInput;
 };
-
 
 export type MutationUpdateLevelArgs = {
   data: UpdateLevelInput;
 };
 
-
 export type MutationUpdatePostArgs = {
   data: UpdatePostInput;
 };
-
 
 export type MutationUpdateStoryArgs = {
   data: UpdateStoryInput;
 };
 
-
 export type MutationUpdateUserArgs = {
   data: UpdateUserInput;
 };
-
 
 export type MutationVoteCommentArgs = {
   data: VoteCommentInput;
@@ -812,31 +799,25 @@ export type Query = {
   verifyUser: User;
 };
 
-
 export type QueryAlbumInfoArgs = {
   data: AlbumInfoInput;
 };
-
 
 export type QueryCategoryInfoArgs = {
   data: CategoryInfoInput;
 };
 
-
 export type QueryChatInfoArgs = {
   data: ChatInfoInput;
 };
-
 
 export type QueryChatInfoByUserIdArgs = {
   data: ChatInfoByUserIdInput;
 };
 
-
 export type QueryContestInfoArgs = {
   data: ContestInfoInput;
 };
-
 
 export type QueryContestPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -844,13 +825,11 @@ export type QueryContestPostsArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryExplorePostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   data?: InputMaybe<ExplorePostsInput>;
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 export type QueryGetAllUserPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -858,24 +837,20 @@ export type QueryGetAllUserPostsArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryGetAllUserStoriesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   currentUserId?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryGetChatMessageArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   chatId?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryGetCommentChildArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type QueryGetCommentsByPostIdArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -883,18 +858,15 @@ export type QueryGetCommentsByPostIdArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryGetCommentsByStoryIdArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   data?: InputMaybe<GetCommentsByStoryIdInput>;
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryGetImageByIdArgs = {
   id: Scalars['String']['input'];
 };
-
 
 export type QueryGetNewFeedArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -903,52 +875,42 @@ export type QueryGetNewFeedArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryGetNewStoriesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryGetTopContestPostsArgs = {
   data: ContestInfoInput;
 };
-
 
 export type QueryGetUserFollowingLeaderBoardArgs = {
   data: UserFollowingLeaderInput;
 };
 
-
 export type QueryMessageInfoArgs = {
   data: MessageInfoInput;
 };
-
 
 export type QueryPostInfoArgs = {
   data: PostInfoInput;
 };
 
-
 export type QueryPostNotInAlbumArgs = {
   data: NotInAlbumInfoInput;
 };
-
 
 export type QueryReportInfoArgs = {
   data: ReportInfoInput;
 };
 
-
 export type QuerySearchQueryArgs = {
   data: SearchQueryInput;
 };
 
-
 export type QuerySearchResultArgs = {
   data: SearchQueryInput;
 };
-
 
 export type QuerySimilarPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -956,11 +918,9 @@ export type QuerySimilarPostsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryStoryInfoArgs = {
   data: StoryInfoInput;
 };
-
 
 export type QuerySuggestUserToFollowArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -968,46 +928,37 @@ export type QuerySuggestUserToFollowArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryTagInfoArgs = {
   data: TagInfoInput;
 };
-
 
 export type QueryUserAllAlbumArgs = {
   data: UserAllAlbumInput;
 };
 
-
 export type QueryUserFollowArgs = {
   data: UserInfoInput;
 };
-
 
 export type QueryUserFollowerInfoArgs = {
   data: UserFollowerInfoInput;
 };
 
-
 export type QueryUserFollowingInfoArgs = {
   data: UserFollowingInfoInput;
 };
-
 
 export type QueryUserInfoArgs = {
   data: UserInfoInput;
 };
 
-
 export type QueryUserLevelArgs = {
   data: UserLevelInput;
 };
 
-
 export type QueryUserNotisArgs = {
   data: UserNotiInfoInput;
 };
-
 
 export type QueryVerifyUserArgs = {
   data: VerifyUserInput;
@@ -1109,11 +1060,9 @@ export type Subscription = {
   updateStatusChat?: Maybe<Chat>;
 };
 
-
 export type SubscriptionCreatedMessageArgs = {
   chatId?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type SubscriptionUpdateStatusChatArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
@@ -1275,7 +1224,7 @@ export type VerifyUserInput = {
 export enum ViewStatus {
   OnlyFollowers = 'ONLY_FOLLOWERS',
   Private = 'PRIVATE',
-  Public = 'PUBLIC'
+  Public = 'PUBLIC',
 }
 
 export type VoteCommentInput = {
@@ -1298,43 +1247,63 @@ export type HashImageWithPostIdsInput = {
 export enum VoteCommentAction {
   Cancel = 'CANCEL',
   Downvote = 'DOWNVOTE',
-  Upvote = 'UPVOTE'
+  Upvote = 'UPVOTE',
 }
 
-
-
 export type ResolverTypeWrapper<T> = Promise<T> | T;
-
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+  | ResolverFn<TResult, TParent, TContext, TArgs>
+  | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
+  // eslint-disable-next-line no-undef
 ) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
-export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
-  subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>;
-  resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>;
+export interface SubscriptionSubscriberObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs,
+> {
+  subscribe: SubscriptionSubscribeFn<
+    {
+      [key in TKey]: TResult;
+    },
+    TParent,
+    TContext,
+    TArgs
+  >;
+  resolve?: SubscriptionResolveFn<
+    TResult,
+    {
+      [key in TKey]: TResult;
+    },
+    TContext,
+    TArgs
+  >;
 }
 
 export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
@@ -1342,33 +1311,54 @@ export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
   resolve: SubscriptionResolveFn<TResult, any, TContext, TArgs>;
 }
 
-export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
+export type SubscriptionObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs,
+> =
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+export type SubscriptionResolver<
+  TResult,
+  TKey extends string,
+  TParent = {},
+  TContext = {},
+  TArgs = {},
+> =
+  | ((
+      ...args: any[]
+    ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+  obj: T,
+  context: TContext,
+  info: GraphQLResolveInfo,
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
+export type DirectiveResolverFn<
+  TResult = {},
+  TParent = {},
+  TContext = {},
+  TArgs = {},
+> = (
   next: NextResolverFn<TResult>,
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
-
-
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
@@ -1610,74 +1600,146 @@ export type ResolversParentTypes = {
   hashImageWithPostIdsInput: HashImageWithPostIdsInput;
 };
 
-export type AlbumResolvers<ContextType = any, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
+export type AlbumResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Album'] = ResolversParentTypes['Album'],
+> = {
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  posts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType>;
+  posts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType
+  >;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
+export type CategoryResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Category'] = ResolversParentTypes['Category'],
+> = {
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  posts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType>;
+  posts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType
+  >;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ChatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
+export type ChatResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Chat'] = ResolversParentTypes['Chat'],
+> = {
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastMessageAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  messages?: Resolver<Array<Maybe<ResolversTypes['Message']>>, ParentType, ContextType>;
-  userIDs?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  messages?: Resolver<
+    Array<Maybe<ResolversTypes['Message']>>,
+    ParentType,
+    ContextType
+  >;
+  userIDs?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CommentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Comment'] = ResolversParentTypes['Comment']> = {
-  child?: Resolver<Maybe<Array<Maybe<ResolversTypes['Comment']>>>, ParentType, ContextType>;
+export type CommentResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Comment'] = ResolversParentTypes['Comment'],
+> = {
+  child?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Comment']>>>,
+    ParentType,
+    ContextType
+  >;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  downVoteUserlist?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  downVoteUserlist?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   postId?: Resolver<ResolversTypes['Post'], ParentType, ContextType>;
   storyId?: Resolver<ResolversTypes['Story'], ParentType, ContextType>;
-  upVoteUserlist?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  upVoteUserlist?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   userId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   votes?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CommentEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['CommentEdge'] = ResolversParentTypes['CommentEdge']> = {
+export type CommentEdgeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['CommentEdge'] = ResolversParentTypes['CommentEdge'],
+> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<Maybe<ResolversTypes['Comment']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CommentPaginationResolvers<ContextType = any, ParentType extends ResolversParentTypes['CommentPagination'] = ResolversParentTypes['CommentPagination']> = {
-  edges?: Resolver<Array<ResolversTypes['CommentEdge']>, ParentType, ContextType>;
+export type CommentPaginationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['CommentPagination'] = ResolversParentTypes['CommentPagination'],
+> = {
+  edges?: Resolver<
+    Array<ResolversTypes['CommentEdge']>,
+    ParentType,
+    ContextType
+  >;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ContestResolvers<ContextType = any, ParentType extends ResolversParentTypes['Contest'] = ResolversParentTypes['Contest']> = {
+export type ContestResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Contest'] = ResolversParentTypes['Contest'],
+> = {
   contestImageURL?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  contestPrizeList?: Resolver<Array<Maybe<ResolversTypes['Contest_Prize']>>, ParentType, ContextType>;
+  contestPrizeList?: Resolver<
+    Array<Maybe<ResolversTypes['Contest_Prize']>>,
+    ParentType,
+    ContextType
+  >;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   endDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isFinished?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  joinedUserIds?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  joinedUserIds?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   startDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Contest_PrizeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Contest_Prize'] = ResolversParentTypes['Contest_Prize']> = {
+export type Contest_PrizeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Contest_Prize'] = ResolversParentTypes['Contest_Prize'],
+> = {
   contestId?: Resolver<ResolversTypes['Contest'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   prizeImageURL?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1687,35 +1749,67 @@ export type Contest_PrizeResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type DeleteAllReturnTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteAllReturnType'] = ResolversParentTypes['DeleteAllReturnType']> = {
+export type DeleteAllReturnTypeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['DeleteAllReturnType'] = ResolversParentTypes['DeleteAllReturnType'],
+> = {
   count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type EndorsementResolvers<ContextType = any, ParentType extends ResolversParentTypes['Endorsement'] = ResolversParentTypes['Endorsement']> = {
-  endorsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+export type EndorsementResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Endorsement'] = ResolversParentTypes['Endorsement'],
+> = {
+  endorsers?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['User']>>>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   skill?: Resolver<Maybe<ResolversTypes['Skill']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FollowerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Follower'] = ResolversParentTypes['Follower']> = {
+export type FollowerResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Follower'] = ResolversParentTypes['Follower'],
+> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  userFollower?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  userFollower?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
   userId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FollowingResolvers<ContextType = any, ParentType extends ResolversParentTypes['Following'] = ResolversParentTypes['Following']> = {
+export type FollowingResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Following'] = ResolversParentTypes['Following'],
+> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  userFollowing?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  userFollowing?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
   userId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
+export type ImageResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Image'] = ResolversParentTypes['Image'],
+> = {
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   hash?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -1726,21 +1820,45 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ImageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['ImageInfo'] = ResolversParentTypes['ImageInfo']> = {
+export type ImageInfoResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['ImageInfo'] = ResolversParentTypes['ImageInfo'],
+> = {
   ISO?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   aperture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   camera?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  copyRight?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  focalLength?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  copyRight?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  focalLength?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   imageId?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
   lens?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  shutterSpeed?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  takenWhen?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  shutterSpeed?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  takenWhen?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type LevelResolvers<ContextType = any, ParentType extends ResolversParentTypes['Level'] = ResolversParentTypes['Level']> = {
+export type LevelResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Level'] = ResolversParentTypes['Level'],
+> = {
   currentLevel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   currentXP?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -1748,7 +1866,11 @@ export type LevelResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
+export type MessageResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Message'] = ResolversParentTypes['Message'],
+> = {
   chatId?: Resolver<ResolversTypes['Chat'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -1758,195 +1880,812 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MessageConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['MessageConnection'] = ResolversParentTypes['MessageConnection']> = {
-  edges?: Resolver<Array<ResolversTypes['MessageEdge']>, ParentType, ContextType>;
+export type MessageConnectionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['MessageConnection'] = ResolversParentTypes['MessageConnection'],
+> = {
+  edges?: Resolver<
+    Array<ResolversTypes['MessageEdge']>,
+    ParentType,
+    ContextType
+  >;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MessageEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['MessageEdge'] = ResolversParentTypes['MessageEdge']> = {
+export type MessageEdgeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['MessageEdge'] = ResolversParentTypes['MessageEdge'],
+> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<Maybe<ResolversTypes['Message']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
+> = {
   _TEST_MUTATION?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  addBiography?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationAddBiographyArgs, 'data'>>;
-  addInterestCategories?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationAddInterestCategoriesArgs, 'data'>>;
-  addNewPhotoToAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationAddNewPhotoToAlbumArgs, 'data'>>;
-  addSkillDefinedList?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<MutationAddSkillDefinedListArgs>>;
-  checkSimilarPosts?: Resolver<ResolversTypes['checkSimilarPostsDetails'], ParentType, ContextType, Partial<MutationCheckSimilarPostsArgs>>;
-  createAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationCreateAlbumArgs, 'data'>>;
-  createCategory?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<MutationCreateCategoryArgs, 'data'>>;
-  createChat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType, RequireFields<MutationCreateChatArgs, 'data'>>;
-  createComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationCreateCommentArgs, 'data'>>;
-  createContest?: Resolver<ResolversTypes['Contest'], ParentType, ContextType, RequireFields<MutationCreateContestArgs, 'data'>>;
-  createMessage?: Resolver<ResolversTypes['Message'], ParentType, ContextType, RequireFields<MutationCreateMessageArgs, 'data'>>;
-  createPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'data'>>;
-  createReport?: Resolver<ResolversTypes['Report'], ParentType, ContextType, RequireFields<MutationCreateReportArgs, 'data'>>;
-  createStory?: Resolver<ResolversTypes['Story'], ParentType, ContextType, RequireFields<MutationCreateStoryArgs, 'data'>>;
-  createTag?: Resolver<Array<Maybe<ResolversTypes['Tag']>>, ParentType, ContextType, RequireFields<MutationCreateTagArgs, 'data'>>;
-  createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'data'>>;
-  deleteAlbum?: Resolver<ResolversTypes['Album'], ParentType, ContextType, RequireFields<MutationDeleteAlbumArgs, 'data'>>;
-  deleteAllAlbum?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllChat?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllMessage?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllNoti?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllPost?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllReport?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllStory?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllTag?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteAllUser?: Resolver<ResolversTypes['DeleteAllReturnType'], ParentType, ContextType>;
-  deleteChat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType, RequireFields<MutationDeleteChatArgs, 'data'>>;
-  deleteComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationDeleteCommentArgs, 'data'>>;
-  deleteContest?: Resolver<ResolversTypes['Contest'], ParentType, ContextType, RequireFields<MutationDeleteContestArgs, 'data'>>;
-  deleteMessage?: Resolver<ResolversTypes['Message'], ParentType, ContextType, RequireFields<MutationDeleteMessageArgs, 'data'>>;
-  deleteNoti?: Resolver<ResolversTypes['Notification'], ParentType, ContextType, RequireFields<MutationDeleteNotiArgs, 'data'>>;
-  deletePost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationDeletePostArgs, 'data'>>;
-  deleteReport?: Resolver<ResolversTypes['Report'], ParentType, ContextType, RequireFields<MutationDeleteReportArgs, 'data'>>;
-  deleteStory?: Resolver<ResolversTypes['Story'], ParentType, ContextType, RequireFields<MutationDeleteStoryArgs, 'data'>>;
-  deleteUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'data'>>;
-  endContest?: Resolver<ResolversTypes['Contest'], ParentType, ContextType, RequireFields<MutationEndContestArgs, 'data'>>;
-  endorseSkill?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationEndorseSkillArgs, 'data'>>;
-  hashImageWithPostIds?: Resolver<ResolversTypes['String'], ParentType, ContextType, Partial<MutationHashImageWithPostIdsArgs>>;
-  interactPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationInteractPostArgs, 'data'>>;
-  interactStory?: Resolver<ResolversTypes['Story'], ParentType, ContextType, RequireFields<MutationInteractStoryArgs, 'data'>>;
-  joinContest?: Resolver<ResolversTypes['Contest'], ParentType, ContextType, RequireFields<MutationJoinContestArgs, 'data'>>;
-  removeInterestCategories?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRemoveInterestCategoriesArgs, 'data'>>;
-  reportedPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationReportedPostArgs, 'data'>>;
-  reportedStory?: Resolver<ResolversTypes['Story'], ParentType, ContextType, RequireFields<MutationReportedStoryArgs, 'data'>>;
-  setSkills?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationSetSkillsArgs, 'data'>>;
-  unEndorseSkill?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUnEndorseSkillArgs, 'data'>>;
-  unfollowUser?: Resolver<ResolversTypes['Following'], ParentType, ContextType, RequireFields<MutationUnfollowUserArgs, 'data'>>;
-  updateComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationUpdateCommentArgs, 'data'>>;
-  updateFollowing?: Resolver<ResolversTypes['Following'], ParentType, ContextType, RequireFields<MutationUpdateFollowingArgs, 'data'>>;
-  updateLevel?: Resolver<ResolversTypes['Level'], ParentType, ContextType, RequireFields<MutationUpdateLevelArgs, 'data'>>;
-  updatePost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationUpdatePostArgs, 'data'>>;
-  updateStory?: Resolver<ResolversTypes['Story'], ParentType, ContextType, RequireFields<MutationUpdateStoryArgs, 'data'>>;
-  updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'data'>>;
-  voteComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationVoteCommentArgs, 'data'>>;
+  addBiography?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddBiographyArgs, 'data'>
+  >;
+  addInterestCategories?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddInterestCategoriesArgs, 'data'>
+  >;
+  addNewPhotoToAlbum?: Resolver<
+    ResolversTypes['Album'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddNewPhotoToAlbumArgs, 'data'>
+  >;
+  addSkillDefinedList?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType,
+    Partial<MutationAddSkillDefinedListArgs>
+  >;
+  checkSimilarPosts?: Resolver<
+    ResolversTypes['checkSimilarPostsDetails'],
+    ParentType,
+    ContextType,
+    Partial<MutationCheckSimilarPostsArgs>
+  >;
+  createAlbum?: Resolver<
+    ResolversTypes['Album'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateAlbumArgs, 'data'>
+  >;
+  createCategory?: Resolver<
+    ResolversTypes['Category'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateCategoryArgs, 'data'>
+  >;
+  createChat?: Resolver<
+    ResolversTypes['Chat'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateChatArgs, 'data'>
+  >;
+  createComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateCommentArgs, 'data'>
+  >;
+  createContest?: Resolver<
+    ResolversTypes['Contest'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateContestArgs, 'data'>
+  >;
+  createMessage?: Resolver<
+    ResolversTypes['Message'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateMessageArgs, 'data'>
+  >;
+  createPost?: Resolver<
+    ResolversTypes['Post'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreatePostArgs, 'data'>
+  >;
+  createReport?: Resolver<
+    ResolversTypes['Report'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateReportArgs, 'data'>
+  >;
+  createStory?: Resolver<
+    ResolversTypes['Story'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateStoryArgs, 'data'>
+  >;
+  createTag?: Resolver<
+    Array<Maybe<ResolversTypes['Tag']>>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateTagArgs, 'data'>
+  >;
+  createUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateUserArgs, 'data'>
+  >;
+  deleteAlbum?: Resolver<
+    ResolversTypes['Album'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteAlbumArgs, 'data'>
+  >;
+  deleteAllAlbum?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllChat?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllMessage?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllNoti?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllPost?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllReport?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllStory?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllTag?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteAllUser?: Resolver<
+    ResolversTypes['DeleteAllReturnType'],
+    ParentType,
+    ContextType
+  >;
+  deleteChat?: Resolver<
+    ResolversTypes['Chat'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteChatArgs, 'data'>
+  >;
+  deleteComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteCommentArgs, 'data'>
+  >;
+  deleteContest?: Resolver<
+    ResolversTypes['Contest'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteContestArgs, 'data'>
+  >;
+  deleteMessage?: Resolver<
+    ResolversTypes['Message'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteMessageArgs, 'data'>
+  >;
+  deleteNoti?: Resolver<
+    ResolversTypes['Notification'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteNotiArgs, 'data'>
+  >;
+  deletePost?: Resolver<
+    ResolversTypes['Post'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeletePostArgs, 'data'>
+  >;
+  deleteReport?: Resolver<
+    ResolversTypes['Report'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteReportArgs, 'data'>
+  >;
+  deleteStory?: Resolver<
+    ResolversTypes['Story'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteStoryArgs, 'data'>
+  >;
+  deleteUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteUserArgs, 'data'>
+  >;
+  endContest?: Resolver<
+    ResolversTypes['Contest'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationEndContestArgs, 'data'>
+  >;
+  endorseSkill?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationEndorseSkillArgs, 'data'>
+  >;
+  hashImageWithPostIds?: Resolver<
+    ResolversTypes['String'],
+    ParentType,
+    ContextType,
+    Partial<MutationHashImageWithPostIdsArgs>
+  >;
+  interactPost?: Resolver<
+    ResolversTypes['Post'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationInteractPostArgs, 'data'>
+  >;
+  interactStory?: Resolver<
+    ResolversTypes['Story'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationInteractStoryArgs, 'data'>
+  >;
+  joinContest?: Resolver<
+    ResolversTypes['Contest'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationJoinContestArgs, 'data'>
+  >;
+  removeInterestCategories?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemoveInterestCategoriesArgs, 'data'>
+  >;
+  reportedPost?: Resolver<
+    ResolversTypes['Post'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationReportedPostArgs, 'data'>
+  >;
+  reportedStory?: Resolver<
+    ResolversTypes['Story'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationReportedStoryArgs, 'data'>
+  >;
+  setSkills?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetSkillsArgs, 'data'>
+  >;
+  unEndorseSkill?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUnEndorseSkillArgs, 'data'>
+  >;
+  unfollowUser?: Resolver<
+    ResolversTypes['Following'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUnfollowUserArgs, 'data'>
+  >;
+  updateComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateCommentArgs, 'data'>
+  >;
+  updateFollowing?: Resolver<
+    ResolversTypes['Following'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateFollowingArgs, 'data'>
+  >;
+  updateLevel?: Resolver<
+    ResolversTypes['Level'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateLevelArgs, 'data'>
+  >;
+  updatePost?: Resolver<
+    ResolversTypes['Post'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdatePostArgs, 'data'>
+  >;
+  updateStory?: Resolver<
+    ResolversTypes['Story'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateStoryArgs, 'data'>
+  >;
+  updateUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateUserArgs, 'data'>
+  >;
+  voteComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationVoteCommentArgs, 'data'>
+  >;
 };
 
-export type NotificationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Notification'] = ResolversParentTypes['Notification']> = {
+export type NotificationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Notification'] = ResolversParentTypes['Notification'],
+> = {
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   postId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   postImage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   postTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  userIds?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  userIds?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
   userTriggerId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = {
-  endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type PageInfoResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo'],
+> = {
+  endCursor?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  hasPreviousPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  startCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hasPreviousPage?: Resolver<
+    ResolversTypes['Boolean'],
+    ParentType,
+    ContextType
+  >;
+  startCursor?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
-  albumId?: Resolver<Array<Maybe<ResolversTypes['Album']>>, ParentType, ContextType>;
+export type PostResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Post'] = ResolversParentTypes['Post'],
+> = {
+  albumId?: Resolver<
+    Array<Maybe<ResolversTypes['Album']>>,
+    ParentType,
+    ContextType
+  >;
   caption?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  categoryId?: Resolver<Array<Maybe<ResolversTypes['Category']>>, ParentType, ContextType>;
-  comments?: Resolver<Array<Maybe<ResolversTypes['Comment']>>, ParentType, ContextType>;
-  contestId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  categoryId?: Resolver<
+    Array<Maybe<ResolversTypes['Category']>>,
+    ParentType,
+    ContextType
+  >;
+  comments?: Resolver<
+    Array<Maybe<ResolversTypes['Comment']>>,
+    ParentType,
+    ContextType
+  >;
+  contestId?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   image?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
   points?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  postViewStatus?: Resolver<ResolversTypes['ViewStatus'], ParentType, ContextType>;
-  reportedUserIds?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
-  tag?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  postViewStatus?: Resolver<
+    ResolversTypes['ViewStatus'],
+    ParentType,
+    ContextType
+  >;
+  reportedUserIds?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
+  tag?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-  userLikedPost?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  userLikedPost?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PostConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['PostConnection'] = ResolversParentTypes['PostConnection']> = {
+export type PostConnectionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['PostConnection'] = ResolversParentTypes['PostConnection'],
+> = {
   edges?: Resolver<Array<ResolversTypes['PostEdge']>, ParentType, ContextType>;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   timeCall?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PostEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['PostEdge'] = ResolversParentTypes['PostEdge']> = {
+export type PostEdgeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['PostEdge'] = ResolversParentTypes['PostEdge'],
+> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PostPaginationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PostPagination'] = ResolversParentTypes['PostPagination']> = {
+export type PostPaginationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['PostPagination'] = ResolversParentTypes['PostPagination'],
+> = {
   edges?: Resolver<Array<ResolversTypes['PostEdge']>, ParentType, ContextType>;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  _TEST_QUERY?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  albumInfo?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType, RequireFields<QueryAlbumInfoArgs, 'data'>>;
-  allAlbums?: Resolver<Array<Maybe<ResolversTypes['Album']>>, ParentType, ContextType>;
-  allCategories?: Resolver<Array<Maybe<ResolversTypes['Category']>>, ParentType, ContextType>;
-  allChats?: Resolver<Array<Maybe<ResolversTypes['Chat']>>, ParentType, ContextType>;
-  allContests?: Resolver<Array<Maybe<ResolversTypes['Contest']>>, ParentType, ContextType>;
-  allFollower?: Resolver<Array<Maybe<ResolversTypes['Follower']>>, ParentType, ContextType>;
-  allFollowing?: Resolver<Array<Maybe<ResolversTypes['Following']>>, ParentType, ContextType>;
-  allImageInfos?: Resolver<Array<Maybe<ResolversTypes['ImageInfo']>>, ParentType, ContextType>;
-  allImages?: Resolver<Array<Maybe<ResolversTypes['Image']>>, ParentType, ContextType>;
-  allLevels?: Resolver<Array<Maybe<ResolversTypes['Level']>>, ParentType, ContextType>;
-  allMessages?: Resolver<Array<Maybe<ResolversTypes['Message']>>, ParentType, ContextType>;
-  allNotis?: Resolver<Array<Maybe<ResolversTypes['Notification']>>, ParentType, ContextType>;
-  allPosts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType>;
-  allReports?: Resolver<Array<Maybe<ResolversTypes['Report']>>, ParentType, ContextType>;
-  allStories?: Resolver<Array<Maybe<ResolversTypes['Story']>>, ParentType, ContextType>;
-  allTags?: Resolver<Array<Maybe<ResolversTypes['Tag']>>, ParentType, ContextType>;
-  allUsers?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
-  categoryInfo?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<QueryCategoryInfoArgs, 'data'>>;
-  chatInfo?: Resolver<ResolversTypes['Chat'], ParentType, ContextType, RequireFields<QueryChatInfoArgs, 'data'>>;
-  chatInfoByUserId?: Resolver<Maybe<Array<Maybe<ResolversTypes['Chat']>>>, ParentType, ContextType, RequireFields<QueryChatInfoByUserIdArgs, 'data'>>;
-  contestInfo?: Resolver<ResolversTypes['Contest'], ParentType, ContextType, RequireFields<QueryContestInfoArgs, 'data'>>;
-  contestPosts?: Resolver<ResolversTypes['PostConnection'], ParentType, ContextType, Partial<QueryContestPostsArgs>>;
-  explorePosts?: Resolver<ResolversTypes['PostPagination'], ParentType, ContextType, Partial<QueryExplorePostsArgs>>;
-  getAllUserLeaderboard?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
-  getAllUserPosts?: Resolver<ResolversTypes['PostConnection'], ParentType, ContextType, Partial<QueryGetAllUserPostsArgs>>;
-  getAllUserStories?: Resolver<ResolversTypes['StoryConnection'], ParentType, ContextType, Partial<QueryGetAllUserStoriesArgs>>;
-  getChatMessage?: Resolver<ResolversTypes['MessageConnection'], ParentType, ContextType, Partial<QueryGetChatMessageArgs>>;
-  getCommentChild?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<QueryGetCommentChildArgs, 'id'>>;
-  getCommentsByPostId?: Resolver<ResolversTypes['CommentPagination'], ParentType, ContextType, Partial<QueryGetCommentsByPostIdArgs>>;
-  getCommentsByStoryId?: Resolver<ResolversTypes['CommentPagination'], ParentType, ContextType, Partial<QueryGetCommentsByStoryIdArgs>>;
-  getImageById?: Resolver<ResolversTypes['Image'], ParentType, ContextType, RequireFields<QueryGetImageByIdArgs, 'id'>>;
-  getNewFeed?: Resolver<ResolversTypes['PostConnection'], ParentType, ContextType, Partial<QueryGetNewFeedArgs>>;
-  getNewStories?: Resolver<ResolversTypes['StoryConnection'], ParentType, ContextType, Partial<QueryGetNewStoriesArgs>>;
-  getSkillDefinedList?: Resolver<Array<Maybe<ResolversTypes['Skill']>>, ParentType, ContextType>;
-  getTopContestPosts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType, RequireFields<QueryGetTopContestPostsArgs, 'data'>>;
-  getUserFollowingLeaderBoard?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, RequireFields<QueryGetUserFollowingLeaderBoardArgs, 'data'>>;
-  messageInfo?: Resolver<ResolversTypes['Message'], ParentType, ContextType, RequireFields<QueryMessageInfoArgs, 'data'>>;
-  postInfo?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<QueryPostInfoArgs, 'data'>>;
-  postNotInAlbum?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType, RequireFields<QueryPostNotInAlbumArgs, 'data'>>;
-  reportInfo?: Resolver<ResolversTypes['Report'], ParentType, ContextType, RequireFields<QueryReportInfoArgs, 'data'>>;
-  searchQuery?: Resolver<ResolversTypes['SearchReturnType'], ParentType, ContextType, RequireFields<QuerySearchQueryArgs, 'data'>>;
-  searchResult?: Resolver<ResolversTypes['SearchReturnType'], ParentType, ContextType, RequireFields<QuerySearchResultArgs, 'data'>>;
-  similarPosts?: Resolver<ResolversTypes['PostPagination'], ParentType, ContextType, RequireFields<QuerySimilarPostsArgs, 'data'>>;
-  storyInfo?: Resolver<ResolversTypes['Story'], ParentType, ContextType, RequireFields<QueryStoryInfoArgs, 'data'>>;
-  suggestTags?: Resolver<Array<Maybe<ResolversTypes['Tag']>>, ParentType, ContextType>;
-  suggestUserToFollow?: Resolver<ResolversTypes['UserPagination'], ParentType, ContextType, RequireFields<QuerySuggestUserToFollowArgs, 'data'>>;
-  tagInfo?: Resolver<ResolversTypes['Tag'], ParentType, ContextType, RequireFields<QueryTagInfoArgs, 'data'>>;
-  userAllAlbum?: Resolver<Array<Maybe<ResolversTypes['Album']>>, ParentType, ContextType, RequireFields<QueryUserAllAlbumArgs, 'data'>>;
-  userFollow?: Resolver<ResolversTypes['UserFollow'], ParentType, ContextType, RequireFields<QueryUserFollowArgs, 'data'>>;
-  userFollowerInfo?: Resolver<ResolversTypes['Follower'], ParentType, ContextType, RequireFields<QueryUserFollowerInfoArgs, 'data'>>;
-  userFollowingInfo?: Resolver<ResolversTypes['Following'], ParentType, ContextType, RequireFields<QueryUserFollowingInfoArgs, 'data'>>;
-  userInfo?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserInfoArgs, 'data'>>;
-  userLevel?: Resolver<ResolversTypes['Level'], ParentType, ContextType, RequireFields<QueryUserLevelArgs, 'data'>>;
-  userNotis?: Resolver<Array<Maybe<ResolversTypes['Notification']>>, ParentType, ContextType, RequireFields<QueryUserNotisArgs, 'data'>>;
-  verifyUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryVerifyUserArgs, 'data'>>;
+export type QueryResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
+> = {
+  _TEST_QUERY?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  albumInfo?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryAlbumInfoArgs, 'data'>
+  >;
+  allAlbums?: Resolver<
+    Array<Maybe<ResolversTypes['Album']>>,
+    ParentType,
+    ContextType
+  >;
+  allCategories?: Resolver<
+    Array<Maybe<ResolversTypes['Category']>>,
+    ParentType,
+    ContextType
+  >;
+  allChats?: Resolver<
+    Array<Maybe<ResolversTypes['Chat']>>,
+    ParentType,
+    ContextType
+  >;
+  allContests?: Resolver<
+    Array<Maybe<ResolversTypes['Contest']>>,
+    ParentType,
+    ContextType
+  >;
+  allFollower?: Resolver<
+    Array<Maybe<ResolversTypes['Follower']>>,
+    ParentType,
+    ContextType
+  >;
+  allFollowing?: Resolver<
+    Array<Maybe<ResolversTypes['Following']>>,
+    ParentType,
+    ContextType
+  >;
+  allImageInfos?: Resolver<
+    Array<Maybe<ResolversTypes['ImageInfo']>>,
+    ParentType,
+    ContextType
+  >;
+  allImages?: Resolver<
+    Array<Maybe<ResolversTypes['Image']>>,
+    ParentType,
+    ContextType
+  >;
+  allLevels?: Resolver<
+    Array<Maybe<ResolversTypes['Level']>>,
+    ParentType,
+    ContextType
+  >;
+  allMessages?: Resolver<
+    Array<Maybe<ResolversTypes['Message']>>,
+    ParentType,
+    ContextType
+  >;
+  allNotis?: Resolver<
+    Array<Maybe<ResolversTypes['Notification']>>,
+    ParentType,
+    ContextType
+  >;
+  allPosts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType
+  >;
+  allReports?: Resolver<
+    Array<Maybe<ResolversTypes['Report']>>,
+    ParentType,
+    ContextType
+  >;
+  allStories?: Resolver<
+    Array<Maybe<ResolversTypes['Story']>>,
+    ParentType,
+    ContextType
+  >;
+  allTags?: Resolver<
+    Array<Maybe<ResolversTypes['Tag']>>,
+    ParentType,
+    ContextType
+  >;
+  allUsers?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
+  categoryInfo?: Resolver<
+    ResolversTypes['Category'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryCategoryInfoArgs, 'data'>
+  >;
+  chatInfo?: Resolver<
+    ResolversTypes['Chat'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryChatInfoArgs, 'data'>
+  >;
+  chatInfoByUserId?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Chat']>>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryChatInfoByUserIdArgs, 'data'>
+  >;
+  contestInfo?: Resolver<
+    ResolversTypes['Contest'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryContestInfoArgs, 'data'>
+  >;
+  contestPosts?: Resolver<
+    ResolversTypes['PostConnection'],
+    ParentType,
+    ContextType,
+    Partial<QueryContestPostsArgs>
+  >;
+  explorePosts?: Resolver<
+    ResolversTypes['PostPagination'],
+    ParentType,
+    ContextType,
+    Partial<QueryExplorePostsArgs>
+  >;
+  getAllUserLeaderboard?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
+  getAllUserPosts?: Resolver<
+    ResolversTypes['PostConnection'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetAllUserPostsArgs>
+  >;
+  getAllUserStories?: Resolver<
+    ResolversTypes['StoryConnection'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetAllUserStoriesArgs>
+  >;
+  getChatMessage?: Resolver<
+    ResolversTypes['MessageConnection'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetChatMessageArgs>
+  >;
+  getCommentChild?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetCommentChildArgs, 'id'>
+  >;
+  getCommentsByPostId?: Resolver<
+    ResolversTypes['CommentPagination'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetCommentsByPostIdArgs>
+  >;
+  getCommentsByStoryId?: Resolver<
+    ResolversTypes['CommentPagination'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetCommentsByStoryIdArgs>
+  >;
+  getImageById?: Resolver<
+    ResolversTypes['Image'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetImageByIdArgs, 'id'>
+  >;
+  getNewFeed?: Resolver<
+    ResolversTypes['PostConnection'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetNewFeedArgs>
+  >;
+  getNewStories?: Resolver<
+    ResolversTypes['StoryConnection'],
+    ParentType,
+    ContextType,
+    Partial<QueryGetNewStoriesArgs>
+  >;
+  getSkillDefinedList?: Resolver<
+    Array<Maybe<ResolversTypes['Skill']>>,
+    ParentType,
+    ContextType
+  >;
+  getTopContestPosts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetTopContestPostsArgs, 'data'>
+  >;
+  getUserFollowingLeaderBoard?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetUserFollowingLeaderBoardArgs, 'data'>
+  >;
+  messageInfo?: Resolver<
+    ResolversTypes['Message'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryMessageInfoArgs, 'data'>
+  >;
+  postInfo?: Resolver<
+    ResolversTypes['Post'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryPostInfoArgs, 'data'>
+  >;
+  postNotInAlbum?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryPostNotInAlbumArgs, 'data'>
+  >;
+  reportInfo?: Resolver<
+    ResolversTypes['Report'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryReportInfoArgs, 'data'>
+  >;
+  searchQuery?: Resolver<
+    ResolversTypes['SearchReturnType'],
+    ParentType,
+    ContextType,
+    RequireFields<QuerySearchQueryArgs, 'data'>
+  >;
+  searchResult?: Resolver<
+    ResolversTypes['SearchReturnType'],
+    ParentType,
+    ContextType,
+    RequireFields<QuerySearchResultArgs, 'data'>
+  >;
+  similarPosts?: Resolver<
+    ResolversTypes['PostPagination'],
+    ParentType,
+    ContextType,
+    RequireFields<QuerySimilarPostsArgs, 'data'>
+  >;
+  storyInfo?: Resolver<
+    ResolversTypes['Story'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryStoryInfoArgs, 'data'>
+  >;
+  suggestTags?: Resolver<
+    Array<Maybe<ResolversTypes['Tag']>>,
+    ParentType,
+    ContextType
+  >;
+  suggestUserToFollow?: Resolver<
+    ResolversTypes['UserPagination'],
+    ParentType,
+    ContextType,
+    RequireFields<QuerySuggestUserToFollowArgs, 'data'>
+  >;
+  tagInfo?: Resolver<
+    ResolversTypes['Tag'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryTagInfoArgs, 'data'>
+  >;
+  userAllAlbum?: Resolver<
+    Array<Maybe<ResolversTypes['Album']>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserAllAlbumArgs, 'data'>
+  >;
+  userFollow?: Resolver<
+    ResolversTypes['UserFollow'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserFollowArgs, 'data'>
+  >;
+  userFollowerInfo?: Resolver<
+    ResolversTypes['Follower'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserFollowerInfoArgs, 'data'>
+  >;
+  userFollowingInfo?: Resolver<
+    ResolversTypes['Following'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserFollowingInfoArgs, 'data'>
+  >;
+  userInfo?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserInfoArgs, 'data'>
+  >;
+  userLevel?: Resolver<
+    ResolversTypes['Level'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserLevelArgs, 'data'>
+  >;
+  userNotis?: Resolver<
+    Array<Maybe<ResolversTypes['Notification']>>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserNotisArgs, 'data'>
+  >;
+  verifyUser?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryVerifyUserArgs, 'data'>
+  >;
 };
 
-export type ReportResolvers<ContextType = any, ParentType extends ResolversParentTypes['Report'] = ResolversParentTypes['Report']> = {
+export type ReportResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Report'] = ResolversParentTypes['Report'],
+> = {
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isFinished?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -1958,114 +2697,290 @@ export type ReportResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type SearchReturnTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchReturnType'] = ResolversParentTypes['SearchReturnType']> = {
-  posts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType>;
-  stories?: Resolver<Array<Maybe<ResolversTypes['Story']>>, ParentType, ContextType>;
+export type SearchReturnTypeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['SearchReturnType'] = ResolversParentTypes['SearchReturnType'],
+> = {
+  posts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType
+  >;
+  stories?: Resolver<
+    Array<Maybe<ResolversTypes['Story']>>,
+    ParentType,
+    ContextType
+  >;
   tags?: Resolver<Array<Maybe<ResolversTypes['Tag']>>, ParentType, ContextType>;
-  users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  users?: Resolver<
+    Array<Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type SkillResolvers<ContextType = any, ParentType extends ResolversParentTypes['Skill'] = ResolversParentTypes['Skill']> = {
-  endorsements?: Resolver<Maybe<Array<Maybe<ResolversTypes['Endorsement']>>>, ParentType, ContextType>;
+export type SkillResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Skill'] = ResolversParentTypes['Skill'],
+> = {
+  endorsements?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Endorsement']>>>,
+    ParentType,
+    ContextType
+  >;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type StoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Story'] = ResolversParentTypes['Story']> = {
-  categoryId?: Resolver<Array<Maybe<ResolversTypes['Category']>>, ParentType, ContextType>;
-  comments?: Resolver<Array<Maybe<ResolversTypes['Comment']>>, ParentType, ContextType>;
+export type StoryResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Story'] = ResolversParentTypes['Story'],
+> = {
+  categoryId?: Resolver<
+    Array<Maybe<ResolversTypes['Category']>>,
+    ParentType,
+    ContextType
+  >;
+  comments?: Resolver<
+    Array<Maybe<ResolversTypes['Comment']>>,
+    ParentType,
+    ContextType
+  >;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  images?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  images?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   points?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  reportedUserIds?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
-  storyViewStatus?: Resolver<ResolversTypes['ViewStatus'], ParentType, ContextType>;
-  tag?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  reportedUserIds?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
+  storyViewStatus?: Resolver<
+    ResolversTypes['ViewStatus'],
+    ParentType,
+    ContextType
+  >;
+  tag?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-  userLikedStory?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  userLikedStory?: Resolver<
+    Array<Maybe<ResolversTypes['String']>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type StoryConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['StoryConnection'] = ResolversParentTypes['StoryConnection']> = {
+export type StoryConnectionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['StoryConnection'] = ResolversParentTypes['StoryConnection'],
+> = {
   edges?: Resolver<Array<ResolversTypes['StoryEdge']>, ParentType, ContextType>;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type StoryEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['StoryEdge'] = ResolversParentTypes['StoryEdge']> = {
+export type StoryEdgeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['StoryEdge'] = ResolversParentTypes['StoryEdge'],
+> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<Maybe<ResolversTypes['Story']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
-  _TEST_SUBCRIPTION?: SubscriptionResolver<ResolversTypes['Int'], "_TEST_SUBCRIPTION", ParentType, ContextType>;
-  createdMessage?: SubscriptionResolver<Maybe<ResolversTypes['Message']>, "createdMessage", ParentType, ContextType, Partial<SubscriptionCreatedMessageArgs>>;
-  updateStatusChat?: SubscriptionResolver<Maybe<ResolversTypes['Chat']>, "updateStatusChat", ParentType, ContextType, Partial<SubscriptionUpdateStatusChatArgs>>;
+export type SubscriptionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
+> = {
+  _TEST_SUBCRIPTION?: SubscriptionResolver<
+    ResolversTypes['Int'],
+    '_TEST_SUBCRIPTION',
+    ParentType,
+    ContextType
+  >;
+  createdMessage?: SubscriptionResolver<
+    Maybe<ResolversTypes['Message']>,
+    'createdMessage',
+    ParentType,
+    ContextType,
+    Partial<SubscriptionCreatedMessageArgs>
+  >;
+  updateStatusChat?: SubscriptionResolver<
+    Maybe<ResolversTypes['Chat']>,
+    'updateStatusChat',
+    ParentType,
+    ContextType,
+    Partial<SubscriptionUpdateStatusChatArgs>
+  >;
 };
 
-export type TagResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tag'] = ResolversParentTypes['Tag']> = {
+export type TagResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Tag'] = ResolversParentTypes['Tag'],
+> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  posts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType>;
+  posts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export type UserResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['User'] = ResolversParentTypes['User'],
+> = {
   age?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  albums?: Resolver<Array<Maybe<ResolversTypes['Album']>>, ParentType, ContextType>;
-  backgroundImageURL?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  biography?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  albums?: Resolver<
+    Array<Maybe<ResolversTypes['Album']>>,
+    ParentType,
+    ContextType
+  >;
+  backgroundImageURL?: Resolver<
+    ResolversTypes['String'],
+    ParentType,
+    ContextType
+  >;
+  biography?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   birthday?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  chatIDs?: Resolver<Array<Maybe<ResolversTypes['Chat']>>, ParentType, ContextType>;
-  contestPrizeList?: Resolver<Array<Maybe<ResolversTypes['Contest_Prize']>>, ParentType, ContextType>;
+  chatIDs?: Resolver<
+    Array<Maybe<ResolversTypes['Chat']>>,
+    ParentType,
+    ContextType
+  >;
+  contestPrizeList?: Resolver<
+    Array<Maybe<ResolversTypes['Contest_Prize']>>,
+    ParentType,
+    ContextType
+  >;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   hashPassword?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  interestCategories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>;
+  interestCategories?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Category']>>>,
+    ParentType,
+    ContextType
+  >;
   isAdmin?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  joinedContestIds?: Resolver<Array<Maybe<ResolversTypes['Contest']>>, ParentType, ContextType>;
+  joinedContestIds?: Resolver<
+    Array<Maybe<ResolversTypes['Contest']>>,
+    ParentType,
+    ContextType
+  >;
   level?: Resolver<ResolversTypes['Level'], ParentType, ContextType>;
-  messages?: Resolver<Array<Maybe<ResolversTypes['Message']>>, ParentType, ContextType>;
+  messages?: Resolver<
+    Array<Maybe<ResolversTypes['Message']>>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  notiIds?: Resolver<Array<Maybe<ResolversTypes['Notification']>>, ParentType, ContextType>;
+  notiIds?: Resolver<
+    Array<Maybe<ResolversTypes['Notification']>>,
+    ParentType,
+    ContextType
+  >;
   phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  posts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType>;
+  posts?: Resolver<
+    Array<Maybe<ResolversTypes['Post']>>,
+    ParentType,
+    ContextType
+  >;
   profileImageURL?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  stories?: Resolver<Array<Maybe<ResolversTypes['Story']>>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  userEndorsements?: Resolver<Maybe<Array<Maybe<ResolversTypes['Endorsement']>>>, ParentType, ContextType>;
+  stories?: Resolver<
+    Array<Maybe<ResolversTypes['Story']>>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  userEndorsements?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Endorsement']>>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserEdge'] = ResolversParentTypes['UserEdge']> = {
+export type UserEdgeResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['UserEdge'] = ResolversParentTypes['UserEdge'],
+> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserFollowResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserFollow'] = ResolversParentTypes['UserFollow']> = {
+export type UserFollowResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['UserFollow'] = ResolversParentTypes['UserFollow'],
+> = {
   follower?: Resolver<ResolversTypes['Follower'], ParentType, ContextType>;
   following?: Resolver<ResolversTypes['Following'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserPaginationResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserPagination'] = ResolversParentTypes['UserPagination']> = {
+export type UserPaginationResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['UserPagination'] = ResolversParentTypes['UserPagination'],
+> = {
   edges?: Resolver<Array<ResolversTypes['UserEdge']>, ParentType, ContextType>;
   pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CheckSimilarPostsDetailsResolvers<ContextType = any, ParentType extends ResolversParentTypes['checkSimilarPostsDetails'] = ResolversParentTypes['checkSimilarPostsDetails']> = {
-  isSimilar?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  post1Imageurl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  post2ImageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type CheckSimilarPostsDetailsResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes['checkSimilarPostsDetails'] = ResolversParentTypes['checkSimilarPostsDetails'],
+> = {
+  isSimilar?: Resolver<
+    Maybe<ResolversTypes['Boolean']>,
+    ParentType,
+    ContextType
+  >;
+  post1Imageurl?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  post2ImageUrl?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2110,4 +3025,3 @@ export type Resolvers<ContextType = any> = {
   UserPagination?: UserPaginationResolvers<ContextType>;
   checkSimilarPostsDetails?: CheckSimilarPostsDetailsResolvers<ContextType>;
 };
-

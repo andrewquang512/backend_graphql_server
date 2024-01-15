@@ -42,8 +42,12 @@ const postQuery = {
             hasEvery: categoryIds,
           },
           OR: [
-            { postViewStatus: 'PUBLIC' },
-            { postViewStatus: 'ONLY_FOLLOWERS' },
+            {
+              postViewStatus: 'PUBLIC',
+            },
+            {
+              postViewStatus: 'ONLY_FOLLOWERS',
+            },
           ],
         },
         orderBy: {
@@ -85,7 +89,11 @@ const postQuery = {
           a = await prisma.post.findMany({
             where: {
               AND: [
-                { userId: { in: b.userFollowing } },
+                {
+                  userId: {
+                    in: b.userFollowing,
+                  },
+                },
                 {
                   categoryId: {
                     hasEvery: categoryIds,
@@ -93,8 +101,12 @@ const postQuery = {
                 },
               ],
               OR: [
-                { postViewStatus: 'PUBLIC' },
-                { postViewStatus: 'ONLY_FOLLOWERS' },
+                {
+                  postViewStatus: 'PUBLIC',
+                },
+                {
+                  postViewStatus: 'ONLY_FOLLOWERS',
+                },
               ],
               NOT: {
                 reportedUserIds: {
@@ -106,7 +118,9 @@ const postQuery = {
               {
                 createdAt: 'desc',
               },
-              { points: 'desc' },
+              {
+                points: 'desc',
+              },
             ],
             skip: Math.trunc(timeCall / 2) * 6,
             take: 6,
@@ -133,10 +147,20 @@ const postQuery = {
           a = await prisma.post.findMany({
             where: {
               AND: [
-                { userId: { notIn: b.userFollowing } },
-                { userId: { not: userId } },
+                {
+                  userId: {
+                    notIn: b.userFollowing,
+                  },
+                },
+                {
+                  userId: {
+                    not: userId,
+                  },
+                },
               ],
-              userId: { notIn: b.userFollowing },
+              userId: {
+                notIn: b.userFollowing,
+              },
               postViewStatus: 'PUBLIC',
               categoryId: {
                 hasEvery: categoryIds,
@@ -151,7 +175,9 @@ const postQuery = {
               {
                 createdAt: 'desc',
               },
-              { points: 'desc' },
+              {
+                points: 'desc',
+              },
             ],
             skip: (timeCall / 2 - 1) * 3,
             take: 3,
@@ -215,8 +241,12 @@ const postQuery = {
           where: {
             userId: args.userId,
             OR: [
-              { postViewStatus: 'PUBLIC' },
-              { postViewStatus: 'ONLY_FOLLOWERS' },
+              {
+                postViewStatus: 'PUBLIC',
+              },
+              {
+                postViewStatus: 'ONLY_FOLLOWERS',
+              },
             ],
           },
           orderBy: {
@@ -274,7 +304,10 @@ const postQuery = {
       users = [];
 
     if (!args.data.searchString) {
-      return { tags, users };
+      return {
+        tags,
+        users,
+      };
     }
 
     users = await prisma.user.findMany({
@@ -325,7 +358,10 @@ const postQuery = {
       take: 6,
     });
 
-    return { tags, users };
+    return {
+      tags,
+      users,
+    };
   },
 
   /**
@@ -342,7 +378,12 @@ const postQuery = {
       stories = [];
 
     if (!args.data.searchString) {
-      return { tags, users, posts, stories };
+      return {
+        tags,
+        users,
+        posts,
+        stories,
+      };
     }
 
     users = await prisma.user.findMany({
@@ -447,7 +488,12 @@ const postQuery = {
       take: 20,
     });
 
-    return { tags, users, posts, stories };
+    return {
+      tags,
+      users,
+      posts,
+      stories,
+    };
   },
 
   /**

@@ -10,8 +10,15 @@ const Chat___ = {
         return pubsub.asyncIterator(['MESSAGE_CREATED']);
       },
       (payload, variables) => {
-        console.log({ payload });
-        console.log({ variables }, 'sub');
+        console.log({
+          payload,
+        });
+        console.log(
+          {
+            variables,
+          },
+          'sub',
+        );
 
         return payload.createdMessage.chatId === variables.chatId;
       },
@@ -24,7 +31,12 @@ const Chat___ = {
       },
       (payload, variables) => {
         console.log(payload.updateStatusChat.userIDs, 'status chat sub');
-        console.log({ variables }, 'status chat sub');
+        console.log(
+          {
+            variables,
+          },
+          'status chat sub',
+        );
 
         return payload.updateStatusChat.userIDs.includes(variables.userId);
       },

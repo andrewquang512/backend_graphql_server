@@ -11,7 +11,9 @@ const Notification = {
   userIds: async (parent, args, info) => {
     return await prisma.user.findMany({
       where: {
-        id: { in: parent.userIds },
+        id: {
+          in: parent.userIds,
+        },
       },
     });
   },

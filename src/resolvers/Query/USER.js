@@ -31,14 +31,21 @@ const userQuery = {
       },
     });
 
-    return { follower, following };
+    return {
+      follower,
+      following,
+    };
   },
   verifyUser: async (parent, args, info) => {
     return await prisma.user.findFirst({
       where: {
         AND: [
-          { hashPassword: args.data.hashPassword },
-          { email: args.data.email },
+          {
+            hashPassword: args.data.hashPassword,
+          },
+          {
+            email: args.data.email,
+          },
         ],
       },
     });
@@ -84,10 +91,14 @@ const userQuery = {
       }),
       prisma.user.count({
         where: {
-          id: { not: userId },
+          id: {
+            not: userId,
+          },
           isAdmin: 0,
           NOT: {
-            id: { in: currentUser.userFollowing },
+            id: {
+              in: currentUser.userFollowing,
+            },
           },
         },
       }),
@@ -127,7 +138,9 @@ const userQuery = {
       },
       take: 5,
       orderBy: {
-        level: { currentLevel: 'desc' },
+        level: {
+          currentLevel: 'desc',
+        },
       },
     });
   },
@@ -140,12 +153,16 @@ const userQuery = {
 
     return await prisma.user.findMany({
       where: {
-        id: { in: currentUser.userFollowing },
+        id: {
+          in: currentUser.userFollowing,
+        },
         isAdmin: 0,
       },
       take: 5,
       orderBy: {
-        level: { currentLevel: 'desc' },
+        level: {
+          currentLevel: 'desc',
+        },
       },
     });
   },

@@ -58,7 +58,9 @@ const contestMutation = {
         contestId: contestId,
       },
       orderBy: [
-        { points: 'desc' },
+        {
+          points: 'desc',
+        },
         {
           createdAt: 'desc',
         },
@@ -71,7 +73,9 @@ const contestMutation = {
       },
     });
 
-    console.log({ users });
+    console.log({
+      users,
+    });
 
     // await prisma.contest_Prize.create({
     //   data: {

@@ -18,14 +18,18 @@ const Post = {
   categoryId: async (parent, args, info) => {
     return await prisma.category.findMany({
       where: {
-        id: { in: parent.categoryId },
+        id: {
+          in: parent.categoryId,
+        },
       },
     });
   },
   albumId: async (parent, args, info) => {
     return await prisma.album.findMany({
       where: {
-        id: { in: parent.albumId },
+        id: {
+          in: parent.albumId,
+        },
       },
     });
   },

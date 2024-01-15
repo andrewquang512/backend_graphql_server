@@ -5,9 +5,13 @@ export const sendNotificationToClient = (tokens, data) => {
   // Send a message to the devices corresponding to the provided
   // registration tokens.
   firebaseMessaging
-    .sendMulticast({ tokens, data })
+    .sendMulticast({
+      tokens,
+      data,
+    })
     .then((response) => {
       // Response is an object of the form { responses: [] }
+      const test = 1;
       const successes = response.responses.filter(
         (r) => r.success === true,
       ).length;

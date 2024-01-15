@@ -10,7 +10,9 @@ const albumQuery = {
     if (currentUserId === userId) {
       return await prisma.post.findMany({
         where: {
-          albumId: { has: albumId },
+          albumId: {
+            has: albumId,
+          },
         },
       });
     } else {
@@ -23,10 +25,16 @@ const albumQuery = {
       if (follower.userFollower.includes(currentUserId)) {
         let a = await prisma.post.findMany({
           where: {
-            albumId: { has: albumId },
+            albumId: {
+              has: albumId,
+            },
             OR: [
-              { postViewStatus: 'PUBLIC' },
-              { postViewStatus: 'ONLY_FOLLOWERS' },
+              {
+                postViewStatus: 'PUBLIC',
+              },
+              {
+                postViewStatus: 'ONLY_FOLLOWERS',
+              },
             ],
           },
 
@@ -35,13 +43,21 @@ const albumQuery = {
           },
         });
 
-        console.log({ a });
+        console.log({
+          a,
+        });
         return a;
       } else {
         let a = await prisma.post.findMany({
           where: {
-            albumId: { has: albumId },
-            OR: [{ postViewStatus: 'PUBLIC' }],
+            albumId: {
+              has: albumId,
+            },
+            OR: [
+              {
+                postViewStatus: 'PUBLIC',
+              },
+            ],
           },
 
           orderBy: {
@@ -49,7 +65,9 @@ const albumQuery = {
           },
         });
 
-        console.log({ a });
+        console.log({
+          a,
+        });
         return a;
       }
     }
@@ -66,7 +84,9 @@ const albumQuery = {
       where: {
         userId: args.data.userId,
         NOT: {
-          albumId: { has: args.data.albumId },
+          albumId: {
+            has: args.data.albumId,
+          },
         },
       },
     });

@@ -29,8 +29,12 @@ const messageMutation = {
       throw e;
     }
 
-    pubsub.publish('MESSAGE_CREATED', { createdMessage: result });
-    pubsub.publish('UPDATE_STATUS_CHAT', { updateStatusChat: chat });
+    pubsub.publish('MESSAGE_CREATED', {
+      createdMessage: result,
+    });
+    pubsub.publish('UPDATE_STATUS_CHAT', {
+      updateStatusChat: chat,
+    });
 
     return result;
   },

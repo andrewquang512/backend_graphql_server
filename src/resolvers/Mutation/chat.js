@@ -29,7 +29,9 @@ const chatMutation = {
           },
         });
 
-        console.log({ result });
+        console.log({
+          result,
+        });
 
         await prisma.user.update({
           where: {
@@ -58,7 +60,9 @@ const chatMutation = {
       }
     }
 
-    pubsub.publish('UPDATE_STATUS_CHAT', { updateStatusChat: result });
+    pubsub.publish('UPDATE_STATUS_CHAT', {
+      updateStatusChat: result,
+    });
 
     return result;
   },
