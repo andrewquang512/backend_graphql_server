@@ -1,0 +1,7 @@
+overwrite: true
+schema: "https://roxqm2ljb8.execute-api.ap-southeast-1.amazonaws.com/"
+generates:
+  src/types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
