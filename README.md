@@ -1,17 +1,9 @@
-# Social-Image-Server
+# My own version of Social-Image-Server
 
-npm i
-npm start
+This is my own version of Social-Image-Server from [my collabrative project](https://github.com/HUNG-rushb/Images-Social-Server)
+In my version, i will perform migraion from Javascript to Typescript and from Apollo Server to GraphQL-yoga
 
-https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/mongodb/install-prisma-client-node-mongodb
-
-https://www.section.io/engineering-education/how-to-setup-prisma-client-server-that-uses-mongodb/
-
-Important
-https://www.youtube.com/watch?v=rtshCulV2hk
-https://byanr.com/aws/deploy-a-node-js-app-on-aws-lightsail/
-
-git pull, enter personal access key
-forever list
-forever stop 0
-forever start src/index.js
+There are 3 main branchs:
++ Branch mirror will be used as branch copy from main branch on original Social-Image-Server using a github action synchronization
++ Branch develop will be used as main for developing and refactoring code
++ Branch main will be used as deployment branch
